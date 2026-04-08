@@ -46,9 +46,21 @@ export function Hero({
               href={resumeHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-fit items-center justify-center rounded-md border border-accent bg-transparent px-4 py-2.5 font-mono text-sm font-medium text-accent transition-colors duration-200 hover:bg-accent/10 focus-visible:bg-accent/10"
+              className="group inline-flex w-fit items-center gap-2 rounded-md border border-accent bg-transparent px-4 py-2.5 font-mono text-sm font-medium text-accent outline-none transition-[color,background-color,border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-white hover:shadow-[0_12px_28px_-8px_rgba(13,148,136,0.45)] focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-0 active:scale-[0.98] motion-reduce:transition-colors motion-reduce:hover:translate-y-0 motion-reduce:hover:shadow-none motion-reduce:active:scale-100"
             >
               {resumeLabel}
+              <svg
+                className="size-4 shrink-0 opacity-75 transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0.5 group-hover:opacity-100 motion-reduce:group-hover:translate-x-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
             </a>
           ) : null}
         </div>
