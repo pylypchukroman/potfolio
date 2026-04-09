@@ -3,6 +3,7 @@
 import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
 import { Hero } from "@/components/Hero";
+import { MoreProjectsTicker } from "@/components/MoreProjectsTicker";
 import { ProjectList } from "@/components/ProjectList";
 import { Section } from "@/components/Section";
 import { Sidebar } from "@/components/Sidebar";
@@ -17,6 +18,7 @@ import {
   experienceSection,
   navigation,
   hero,
+  moreProjects,
   projects,
   projectsSection,
   socialLinks,
@@ -84,6 +86,7 @@ export function PortfolioPage() {
                   index={projectsSection.number}
                 >
                   <ProjectList projects={projects} />
+                  <MoreProjectsTicker projects={moreProjects} />
                 </Section>
 
                 <Section

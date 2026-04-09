@@ -21,13 +21,13 @@ export function About({
   return (
     <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-10">
       <PhotoReveal className="shrink-0">
-        <div className="relative h-40 w-40 overflow-hidden rounded-2xl border border-border bg-card sm:h-44 sm:w-44">
+        <div className="group relative h-48 w-48 overflow-hidden rounded-2xl border border-border bg-card sm:h-56 sm:w-56">
           <Image
             src={imageSrc}
             alt={imageAlt}
             fill
-            sizes="176px"
-            className="object-cover"
+            sizes="224px"
+            className="object-cover grayscale transition-[filter] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grayscale-0 group-focus-within:grayscale-0 motion-reduce:transition-none"
             priority
           />
         </div>

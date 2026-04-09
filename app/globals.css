@@ -42,6 +42,9 @@ body {
   color: var(--foreground);
 }
 
+/* More projects ticker:
+   handled in JS so it can be a real scroll container (wheel/touch + infinite loop) */
+
 /* Visible focus for keyboard users — do not remove */
 :focus-visible {
   outline: 2px solid var(--accent);

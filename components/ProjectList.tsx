@@ -96,15 +96,27 @@ export function ProjectList({ projects }: ProjectListProps) {
                   : { transition: { duration: 0.25, ease } }
               }
             >
-              <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-0">
+              {/*
+                Second project: swap layout (photo left, text right).
+                Indexing is 0-based, so the "second" card is index === 1.
+              */}
+              {(() => {
+                const swapped = index === 1;
+                return (
+                  <div
+                    className={
+                      "flex flex-col gap-8 lg:items-start lg:gap-0 " +
+                      (swapped ? "lg:flex-row-reverse" : "lg:flex-row")
+                    }
+                  >
                 {/* Preview image — left, large */}
-                <div className="relative z-0 w-full shrink-0 lg:w-[min(100%,58%)] lg:max-w-2xl">
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-lg border border-border bg-muted/20 shadow-sm">
+                <div className="group relative z-0 w-full shrink-0 lg:w-[min(100%,62%)] lg:max-w-3xl">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-border bg-muted/20 shadow-sm">
                     <Image
                       src={project.imageSrc}
                       alt={project.imageAlt}
                       fill
-                      className="object-cover"
+                      className="object-cover grayscale transition-[filter] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grayscale-0 group-focus-within:grayscale-0 motion-reduce:transition-none"
                       sizes="(max-width: 1024px) 100vw, 640px"
                     />
                   </div>
@@ -112,7 +124,12 @@ export function ProjectList({ projects }: ProjectListProps) {
 
                 {/* Meta + overlapping panel — right */}
                 <div
-                  className="relative z-10 flex w-full min-w-0 flex-col lg:-ml-16 lg:mt-4 lg:w-[42%] lg:max-w-md lg:flex-1 lg:items-end lg:text-right xl:-ml-24"
+                  className={
+                    "relative z-10 flex w-full min-w-0 flex-col lg:mt-4 lg:w-[42%] lg:max-w-md lg:flex-1 " +
+                    (swapped
+                      ? "lg:-mr-16 lg:items-start lg:text-left xl:-mr-24"
+                      : "lg:-ml-16 lg:items-end lg:text-right xl:-ml-24")
+                  }
                 >
                   <p className="font-mono text-sm font-medium text-accent">
                     {project.eyebrow ?? "Featured project"}
@@ -134,7 +151,12 @@ export function ProjectList({ projects }: ProjectListProps) {
                   </h3>
 
                   {project.year ? (
-                    <p className="mt-1 font-mono text-sm text-muted lg:self-end">
+                    <p
+                      className={
+                        "mt-1 font-mono text-sm text-muted " +
+                        (swapped ? "lg:self-start" : "lg:self-end")
+                      }
+                    >
                       {project.year}
                     </p>
                   ) : null}
@@ -150,7 +172,10 @@ export function ProjectList({ projects }: ProjectListProps) {
                   </div>
 
                   <ul
-                    className="mt-5 flex flex-wrap gap-x-6 gap-y-2 font-mono text-sm text-muted lg:justify-end"
+                    className={
+                      "mt-5 flex flex-wrap gap-x-6 gap-y-2 font-mono text-sm text-muted " +
+                      (swapped ? "lg:justify-start" : "lg:justify-end")
+                    }
                     aria-label="Technologies"
                   >
                     {project.tech.map((t) => (
@@ -159,7 +184,12 @@ export function ProjectList({ projects }: ProjectListProps) {
                   </ul>
 
                   {project.repo || project.href ? (
-                    <div className="mt-4 flex gap-5 lg:justify-end">
+                    <div
+                      className={
+                        "mt-4 flex gap-5 " +
+                        (swapped ? "lg:justify-start" : "lg:justify-end")
+                      }
+                    >
                       {project.repo ? (
                         <a
                           href={project.repo}
@@ -185,7 +215,9 @@ export function ProjectList({ projects }: ProjectListProps) {
                     </div>
                   ) : null}
                 </div>
-              </div>
+                  </div>
+                );
+              })()}
             </motion.article>
           </Reveal>
         </li>

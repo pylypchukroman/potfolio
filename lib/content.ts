@@ -39,6 +39,15 @@ export type Project = {
   year?: string;
 };
 
+/** Smaller projects shown in the scrolling ticker under Projects */
+export type MiniProject = {
+  id: string;
+  title: string;
+  description: string;
+  href?: string;
+  repo?: string;
+};
+
 export type Experience = {
   /** Stable id for tabs (e.g. acme) */
   id: string;
@@ -282,3 +291,65 @@ export const projects: Project[] = [
     year: "2024",
   },
 ];
+
+/**
+ * Extra projects under Projects — shows as an infinite scrolling list of names.
+ * Hover/focus a name to preview details + links.
+ */
+export const moreProjects: MiniProject[] = [
+  {
+    id: "lintkit",
+    title: "LintKit",
+    description:
+      "Small CLI that applies opinionated ESLint/Prettier defaults and keeps teams consistent across repos.",
+    repo: "https://github.com",
+  },
+  {
+    id: "notes",
+    title: "Notes Sync",
+    description:
+      "Minimal note app with offline-first sync and conflict resolution for spotty networks.",
+    href: "https://example.com",
+  },
+  {
+    id: "image-pipe",
+    title: "Image Pipeline",
+    description:
+      "Build-time image optimization pipeline with responsive sizing and cache-friendly fingerprints.",
+  },
+  {
+    id: "cacheview",
+    title: "CacheView",
+    description:
+      "Tiny web UI for inspecting Redis keys, TTLs, and hit rates while debugging caching behavior.",
+    href: "https://example.com",
+    repo: "https://github.com",
+  },
+  {
+    id: "formsprint",
+    title: "FormSprint",
+    description:
+      "Accessible form components + validation helpers with great defaults and minimal bundle cost.",
+    repo: "https://github.com",
+  },
+  {
+    id: "statuspulse",
+    title: "StatusPulse",
+    description:
+      "Simple incident/status page with RSS updates, uptime graphs, and a lightweight admin workflow.",
+    href: "https://example.com",
+  },
+  {
+    id: "snipshare",
+    title: "SnipShare",
+    description:
+      "Pastebin-style snippet sharing with expiring links, syntax highlighting, and private notes.",
+    repo: "https://github.com",
+  },
+  {
+    id: "meetmint",
+    title: "MeetMint",
+    description:
+      "Meeting notes helper that turns action items into tasks and exports to Markdown.",
+  },
+] as const;
