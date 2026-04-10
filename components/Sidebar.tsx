@@ -105,6 +105,36 @@ function useActiveNavSection(sectionIds: readonly string[]) {
   return { activeId, onNavLinkClick };
 }
 
+function useSectionCenteredVisibility(sectionId: string) {
+  const [isCentered, setIsCentered] = useState(false);
+
+  useEffect(() => {
+    const measure = () => {
+      const target = document.getElementById(sectionId);
+      if (!target) {
+        setIsCentered(false);
+        return;
+      }
+
+      const marker = window.scrollY + window.innerHeight * 0.5;
+      const top = target.getBoundingClientRect().top + window.scrollY;
+      const bottom = top + target.offsetHeight;
+      setIsCentered(top <= marker && bottom >= marker);
+    };
+
+    measure();
+    window.addEventListener("scroll", measure, { passive: true });
+    window.addEventListener("resize", measure);
+
+    return () => {
+      window.removeEventListener("scroll", measure);
+      window.removeEventListener("resize", measure);
+    };
+  }, [sectionId]);
+
+  return isCentered;
+}
+
 export function Sidebar({
   name,
   headline,
@@ -117,6 +147,8 @@ export function Sidebar({
   );
   const { activeId, onNavLinkClick } = useActiveNavSection(sectionIds);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isHeroCentered = useSectionCenteredVisibility("hero");
+  const isDesktopSidebarVisible = !isHeroCentered;
 
   return (
     <>
@@ -213,7 +245,12 @@ export function Sidebar({
         </div>
       </div>
 
-      <header className="hidden flex-col gap-8 lg:flex">
+      <header
+        className={
+          "hidden flex-col gap-8 transition-opacity duration-300 lg:flex " +
+          (isDesktopSidebarVisible ? "opacity-100" : "pointer-events-none opacity-0")
+        }
+      >
         <StaggerContainer className="flex flex-col gap-4">
           <StaggerItem>
             <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
