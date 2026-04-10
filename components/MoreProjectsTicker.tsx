@@ -67,11 +67,10 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
         </p>
       </div>
 
-      <div className="grid gap-6 rounded-xl bg-card/60 p-4 sm:p-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] lg:items-stretch">
-        {/* Left: list of names */}
-        <div className="relative">
+      <div className="flex flex-col gap-6 rounded-xl bg-card/60 p-4 sm:p-5">
+        <div className="relative -mx-1 min-w-0">
           <ul
-            className="flex max-h-56 flex-col gap-2 overflow-y-auto pr-2 [scrollbar-width:thin] sm:max-h-72"
+            className="flex snap-x snap-proximity gap-2 overflow-x-auto overflow-y-hidden overscroll-x-contain px-1 pb-2 [scrollbar-width:thin] [-webkit-overflow-scrolling:touch]"
             aria-label="More projects list"
           >
             {safeProjects.map((p) => {
@@ -80,22 +79,23 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
               const Tag = link ? "a" : "button";
 
               return (
-                <li key={p.id}>
+                <li key={p.id} className="shrink-0 snap-start">
                   <Tag
                     href={link ?? undefined}
                     target={link ? "_blank" : undefined}
                     rel={link ? "noopener noreferrer" : undefined}
                     type={link ? undefined : "button"}
+                    onClick={() => setActiveId(p.id)}
                     onMouseEnter={() => setActiveId(p.id)}
                     onFocus={() => setActiveId(p.id)}
                     className={
-                      "relative flex h-11 w-full items-center rounded-lg py-1 pl-3 pr-3 text-left font-mono text-sm transition-[color,background-color,opacity] duration-200 before:absolute before:left-0 before:top-2 before:bottom-2 before:w-0.5 before:rounded-full before:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:ring-offset-2 focus-visible:ring-offset-background " +
+                      "relative inline-flex h-10 items-center whitespace-nowrap rounded-lg py-1 pl-3 pr-3 text-left font-mono text-sm transition-[color,background-color,opacity] duration-200 before:absolute before:left-0 before:top-2 before:bottom-2 before:w-0.5 before:rounded-full before:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:ring-offset-2 focus-visible:ring-offset-background " +
                       (isActive
                         ? "bg-accent/12 font-medium text-accent before:bg-accent"
                         : "bg-transparent text-foreground/36 before:bg-transparent hover:bg-accent/8 hover:text-foreground/52")
                     }
                   >
-                    {p.title}
+                    <span className="pl-1">{p.title}</span>
                   </Tag>
                 </li>
               );
@@ -103,8 +103,7 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
           </ul>
         </div>
 
-        {/* Right: preview card */}
-        <div className="flex min-h-56 sm:min-h-72 lg:pt-0.5">
+        <div className="flex min-h-56 sm:min-h-72">
           <AnimatePresence mode="wait" initial={false}>
             {active ? (
               <motion.div

@@ -42,8 +42,7 @@ body {
   color: var(--foreground);
 }
 
-/* More projects ticker:
-   handled in JS so it can be a real scroll container (wheel/touch + infinite loop) */
+/* More projects: horizontal scroll list + detail card (MoreProjectsTicker) */
 
 /* Visible focus for keyboard users — do not remove */
 :focus-visible {

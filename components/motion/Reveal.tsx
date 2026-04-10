@@ -38,7 +38,7 @@ type RevealProps = {
 /** Viewport tuned so sections animate when you scroll them into view */
 const revealViewport = {
   once: true,
-  amount: 0.2,
+  amount: "some" as const,
   margin: "0px 0px -14% 0px",
 } as const;
 

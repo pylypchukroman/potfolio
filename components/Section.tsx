@@ -3,9 +3,10 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { motionEase } from "@/components/motion/Reveal";
 
+/** Tall sections: ratio 0.2 can never be met on short viewports (visible slice < 20% of section height). */
 const sectionViewport = {
   once: true,
-  amount: 0.2,
+  amount: "some" as const,
   margin: "0px 0px -14% 0px",
 } as const;
 
