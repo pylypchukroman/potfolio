@@ -61,9 +61,29 @@ function Icon({
 
 type SocialDockProps = {
   links: SocialLink[];
+  mode?: "floating" | "inline";
 };
 
-export function SocialDock({ links }: SocialDockProps) {
+export function SocialDock({ links, mode = "floating" }: SocialDockProps) {
+  if (mode === "inline") {
+    return (
+      <nav aria-label="Social profiles" className="flex items-center gap-3">
+        {links.map((link) => (
+          <a
+            key={link.network}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={link.label}
+            className="inline-flex min-h-9 min-w-9 items-center justify-center text-muted transition-colors duration-200 hover:text-accent focus-visible:text-accent"
+          >
+            <Icon network={link.network} />
+          </a>
+        ))}
+      </nav>
+    );
+  }
+
   return (
     <div className="pointer-events-none fixed bottom-0 left-2 z-50 flex w-5 flex-col items-center max-sm:left-1.5">
       <nav

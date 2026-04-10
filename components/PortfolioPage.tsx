@@ -7,7 +7,6 @@ import { MoreProjectsTicker } from "@/components/MoreProjectsTicker";
 import { ProjectList } from "@/components/ProjectList";
 import { Section } from "@/components/Section";
 import { Sidebar } from "@/components/Sidebar";
-import { SocialDock } from "@/components/SocialDock";
 import { WorkExperience } from "@/components/WorkExperience";
 import { Reveal, StaggerContainer, StaggerItem } from "@/components/motion/Reveal";
 import {
@@ -27,15 +26,15 @@ import {
 export function PortfolioPage() {
   return (
     <div className="min-h-full">
-      <SocialDock links={socialLinks} />
       <div className="mx-auto max-w-6xl py-16 pb-36 pl-4 pr-6 max-sm:pb-44 sm:pl-5 lg:py-24 lg:pb-24 lg:pl-8 lg:pr-12">
-        <StaggerContainer className="grid grid-cols-1 gap-16 md:grid-cols-[minmax(0,280px)_minmax(0,1fr)] md:gap-20 lg:gap-24">
+        <StaggerContainer className="grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)] lg:gap-24">
           <StaggerItem>
-            <aside className="md:sticky md:top-28 md:self-start">
+            <aside className="lg:sticky lg:top-28 lg:self-start">
               <Sidebar
                 name={about.name}
                 headline={about.headline}
                 navigation={navigation}
+                socialLinks={socialLinks}
               />
             </aside>
           </StaggerItem>
