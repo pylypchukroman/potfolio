@@ -116,7 +116,7 @@ export function ProjectList({ projects }: ProjectListProps) {
                       src={project.imageSrc}
                       alt={project.imageAlt}
                       fill
-                      className="object-cover grayscale transition-[filter] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grayscale-0 group-focus-within:grayscale-0 motion-reduce:transition-none"
+                      className="object-cover transition-[filter] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] lg:grayscale lg:group-hover:grayscale-0 lg:group-focus-within:grayscale-0 motion-reduce:transition-none"
                       sizes="(max-width: 1024px) 100vw, 640px"
                     />
                   </div>
