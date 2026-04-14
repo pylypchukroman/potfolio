@@ -24,6 +24,21 @@ import {
 } from "@/lib/content";
 
 export function PortfolioPage() {
+  const credit = (
+    <>
+      Layout inspired by{" "}
+      <a
+        href="https://v4.brittanychiang.com/"
+        className="text-muted underline decoration-border underline-offset-4 transition-colors hover:text-accent focus-visible:text-accent"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Brittany Chiang
+      </a>
+      . Built with Next.js.
+    </>
+  );
+
   return (
     <div className="min-h-full">
       <div className="mx-auto max-w-6xl py-16 pb-36 pl-4 pr-6 max-sm:pb-44 sm:pl-5 lg:py-24 lg:pb-24 lg:pl-8 lg:pr-12">
@@ -94,27 +109,15 @@ export function PortfolioPage() {
                   index={contactSection.number}
                   className="flex min-h-[min(70dvh,36rem)] w-full flex-1 flex-col"
                 >
-                  <Contact
-                    intro={contact.intro}
-                    email={contact.email}
-                    emailCta={contact.emailCta}
-                  />
+                  <div className="space-y-10">
+                    <Contact
+                      intro={contact.intro}
+                      email={contact.email}
+                      emailCta={contact.emailCta}
+                    />
+                    <p className="font-mono text-xs text-muted">{credit}</p>
+                  </div>
                 </Section>
-
-                <Reveal>
-                  <p className="font-mono text-xs text-muted">
-                    Layout inspired by{" "}
-                    <a
-                      href="https://v4.brittanychiang.com/"
-                      className="text-muted underline decoration-border underline-offset-4 transition-colors hover:text-accent focus-visible:text-accent"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Brittany Chiang
-                    </a>
-                    . Built with Next.js.
-                  </p>
-                </Reveal>
               </div>
             </main>
           </StaggerItem>
