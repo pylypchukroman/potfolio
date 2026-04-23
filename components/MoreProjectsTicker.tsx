@@ -46,10 +46,6 @@ function GitHubIcon({ className }: { className?: string }) {
   );
 }
 
-function primaryLinkFor(project: MiniProject) {
-  return project.href ?? project.repo ?? null;
-}
-
 export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
   const reduce = useReducedMotion();
   const safeProjects = projects.filter((p) => p.title.trim().length > 0);
@@ -75,16 +71,11 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
           >
             {safeProjects.map((p) => {
               const isActive = active?.id === p.id;
-              const link = primaryLinkFor(p);
-              const Tag = link ? "a" : "button";
 
               return (
                 <li key={p.id} className="shrink-0 snap-start">
-                  <Tag
-                    href={link ?? undefined}
-                    target={link ? "_blank" : undefined}
-                    rel={link ? "noopener noreferrer" : undefined}
-                    type={link ? undefined : "button"}
+                  <button
+                    type="button"
                     onClick={() => setActiveId(p.id)}
                     onMouseEnter={() => setActiveId(p.id)}
                     onFocus={() => setActiveId(p.id)}
@@ -96,7 +87,7 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
                     }
                   >
                     <span className="pl-1">{p.title}</span>
-                  </Tag>
+                  </button>
                 </li>
               );
             })}

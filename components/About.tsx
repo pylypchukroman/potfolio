@@ -55,7 +55,7 @@ export function About({
               <h3 className="font-mono text-sm font-medium uppercase tracking-widest text-muted">
                 Skills
               </h3>
-              <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3">
                 {skillColumns.map((column, columnIndex) => (
                   <ul
                     key={columnIndex}

@@ -91,7 +91,7 @@ export function WorkExperience({ experiences }: WorkExperienceProps) {
       <div
         role="tablist"
         aria-label="Employers"
-        className="flex flex-wrap gap-x-1 gap-y-0 border-b border-border"
+        className="flex overflow-x-auto border-b border-border sm:flex-row sm:flex-wrap sm:gap-x-1"
       >
         {experiences.map((job) => {
           const selected = job.id === active.id;
@@ -106,7 +106,7 @@ export function WorkExperience({ experiences }: WorkExperienceProps) {
               tabIndex={selected ? 0 : -1}
               onClick={() => setActiveId(job.id)}
               className={
-                "relative shrink-0 border-b-2 px-3 py-2.5 font-mono text-sm transition-colors max-sm:px-2 max-sm:text-xs " +
+                "relative shrink-0 whitespace-nowrap border-b-2 px-3 py-2.5 font-mono text-sm transition-colors max-sm:px-2 max-sm:text-xs " +
                 (selected
                   ? "-mb-px border-accent font-medium text-accent"
                   : "border-transparent text-muted hover:text-foreground")
