@@ -80,10 +80,10 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
                     onMouseEnter={() => setActiveId(p.id)}
                     onFocus={() => setActiveId(p.id)}
                     className={
-                      "relative inline-flex h-10 items-center whitespace-nowrap rounded-lg py-1 pl-3 pr-3 text-left font-mono text-sm transition-[color,background-color,opacity] duration-200 before:absolute before:left-0 before:top-2 before:bottom-2 before:w-0.5 before:rounded-full before:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:ring-offset-2 focus-visible:ring-offset-background " +
+                      "relative inline-flex h-10 cursor-pointer items-center whitespace-nowrap rounded-lg py-1 pl-3 pr-3 text-left font-mono text-sm transition-[color,background-color,opacity] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:ring-offset-2 focus-visible:ring-offset-background " +
                       (isActive
-                        ? "bg-accent/12 font-medium text-accent before:bg-accent"
-                        : "bg-transparent text-foreground/36 before:bg-transparent hover:bg-accent/8 hover:text-foreground/52")
+                        ? "bg-accent/12 font-medium text-accent"
+                        : "bg-transparent text-foreground/36 hover:bg-accent/8 hover:text-foreground/52")
                     }
                   >
                     <span className="pl-1">{p.title}</span>

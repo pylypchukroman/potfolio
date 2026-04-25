@@ -105,21 +105,21 @@ function useActiveNavSection(sectionIds: readonly string[]) {
   return { activeId, onNavLinkClick };
 }
 
-function useSectionCenteredVisibility(sectionId: string) {
-  const [isCentered, setIsCentered] = useState(false);
+function useSectionScrolledPastRatio(sectionId: string, ratio: number) {
+  const [isPastRatio, setIsPastRatio] = useState(false);
 
   useEffect(() => {
     const measure = () => {
       const target = document.getElementById(sectionId);
       if (!target) {
-        setIsCentered(false);
+        setIsPastRatio(false);
         return;
       }
 
-      const marker = window.scrollY + window.innerHeight * 0.5;
-      const top = target.getBoundingClientRect().top + window.scrollY;
-      const bottom = top + target.offsetHeight;
-      setIsCentered(top <= marker && bottom >= marker);
+      const rect = target.getBoundingClientRect();
+      const sectionHeight = Math.max(rect.height, 1);
+      const scrolledPastPx = Math.max(-rect.top, 0);
+      setIsPastRatio(scrolledPastPx / sectionHeight >= ratio);
     };
 
     measure();
@@ -130,9 +130,9 @@ function useSectionCenteredVisibility(sectionId: string) {
       window.removeEventListener("scroll", measure);
       window.removeEventListener("resize", measure);
     };
-  }, [sectionId]);
+  }, [sectionId, ratio]);
 
-  return isCentered;
+  return isPastRatio;
 }
 
 export function Sidebar({
@@ -147,8 +147,8 @@ export function Sidebar({
   );
   const { activeId, onNavLinkClick } = useActiveNavSection(sectionIds);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isHeroCentered = useSectionCenteredVisibility("hero");
-  const isDesktopSidebarVisible = !isHeroCentered;
+  const isHeroScrolledPastSeventyPercent = useSectionScrolledPastRatio("hero", 0.7);
+  const isDesktopSidebarVisible = isHeroScrolledPastSeventyPercent;
 
   return (
     <>
