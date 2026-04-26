@@ -29,8 +29,8 @@ function useSectionVariants(): { container: Variants; item: Variants } {
       hidden: {},
       visible: {
         transition: {
-          staggerChildren: 0.11,
-          delayChildren: 0.07,
+          staggerChildren: 0.14,
+          delayChildren: 0.1,
         },
       },
     },
@@ -39,7 +39,7 @@ function useSectionVariants(): { container: Variants; item: Variants } {
       visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.52, ease: motionEase },
+        transition: { duration: 0.7, ease: motionEase },
       },
     },
   };
@@ -50,6 +50,8 @@ type SectionProps = {
   title: string;
   /** Optional numbered prefix + horizontal rule (e.g. portfolio projects block) */
   index?: string;
+  /** Set false when children manage their own reveal timing. */
+  animateContent?: boolean;
   children: React.ReactNode;
   className?: string;
 };
@@ -58,6 +60,7 @@ export function Section({
   id,
   title,
   index,
+  animateContent = true,
   children,
   className = "",
 }: SectionProps) {
@@ -97,9 +100,13 @@ export function Section({
           {title}
         </motion.h2>
       )}
-      <motion.div variants={item} className="min-w-0">
-        {children}
-      </motion.div>
+      {animateContent ? (
+        <motion.div variants={item} className="min-w-0">
+          {children}
+        </motion.div>
+      ) : (
+        <div className="min-w-0">{children}</div>
+      )}
     </motion.section>
   );
 }

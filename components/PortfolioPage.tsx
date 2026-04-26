@@ -98,6 +98,7 @@ export function PortfolioPage() {
                   id="projects"
                   title={projectsSection.title}
                   index={projectsSection.number}
+                  animateContent={false}
                 >
                   <ProjectList projects={projects} />
                   <MoreProjectsTicker projects={moreProjects} />

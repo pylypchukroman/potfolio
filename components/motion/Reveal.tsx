@@ -24,7 +24,7 @@ function useRevealVariants(delay = 0): Variants {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.55, delay, ease: motionEase },
+      transition: { duration: 0.72, delay, ease: motionEase },
     },
   };
 }
@@ -76,8 +76,8 @@ export function StaggerContainer({
         hidden: {},
         visible: {
           transition: {
-            staggerChildren: reduce ? 0 : 0.07,
-            delayChildren: reduce ? 0 : 0.04,
+            staggerChildren: reduce ? 0 : 0.1,
+            delayChildren: reduce ? 0 : 0.06,
           },
         },
       }}
@@ -107,7 +107,7 @@ export function StaggerItem({
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.45, ease: motionEase },
+          transition: { duration: 0.6, ease: motionEase },
         },
       }}
     >
@@ -134,7 +134,7 @@ export function PhotoReveal({
       }
       whileInView={reduce ? undefined : { opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: "-8% 0px" }}
-      transition={{ duration: 0.45, ease: motionEase }}
+      transition={{ duration: 0.62, ease: motionEase }}
     >
       {children}
     </motion.div>

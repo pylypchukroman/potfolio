@@ -9,6 +9,7 @@ type MoreProjectsTickerProps = {
 };
 
 const ease = [0.22, 1, 0.36, 1] as const;
+const itemViewport = { once: true, amount: 0.8 } as const;
 
 function ExternalIcon({ className }: { className?: string }) {
   return (
@@ -69,11 +70,22 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
             className="flex snap-x snap-proximity gap-2 overflow-x-auto overflow-y-hidden overscroll-x-contain px-1 pb-2 [scrollbar-width:thin] [-webkit-overflow-scrolling:touch]"
             aria-label="More projects list"
           >
-            {safeProjects.map((p) => {
+            {safeProjects.map((p, index) => {
               const isActive = active?.id === p.id;
 
               return (
-                <li key={p.id} className="shrink-0 snap-start">
+                <motion.li
+                  key={p.id}
+                  className="shrink-0 snap-start"
+                  initial={reduce ? false : { opacity: 0, y: 10 }}
+                  whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+                  viewport={itemViewport}
+                  transition={
+                    reduce
+                      ? { duration: 0 }
+                      : { duration: 0.45, delay: index * 0.06, ease }
+                  }
+                >
                   <button
                     type="button"
                     onClick={() => setActiveId(p.id)}
@@ -88,7 +100,7 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
                   >
                     <span className="pl-1">{p.title}</span>
                   </button>
-                </li>
+                </motion.li>
               );
             })}
           </ul>
