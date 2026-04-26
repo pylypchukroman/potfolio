@@ -62,9 +62,6 @@ export function PortfolioPage() {
               <div className="flex flex-col gap-20 lg:gap-24">
                 <Reveal className="flex min-h-[100dvh] w-full flex-col">
                   <Hero
-                    eyebrow={hero.eyebrow}
-                    titleLead={hero.titleLead}
-                    titleAccent={hero.titleAccent}
                     intro={hero.intro}
                     resumeHref={hero.resumeHref}
                     resumeLabel={hero.resumeLabel}

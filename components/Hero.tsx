@@ -1,9 +1,8 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
+
 type HeroProps = {
-  eyebrow: string;
-  titleLead: string;
-  titleAccent: string;
   intro: readonly string[];
   /** Path to CV PDF under public/, e.g. /resume.pdf */
   resumeHref?: string;
@@ -11,13 +10,71 @@ type HeroProps = {
 };
 
 export function Hero({
-  eyebrow,
-  titleLead,
-  titleAccent,
   intro,
   resumeHref,
   resumeLabel = "Résumé",
 }: HeroProps) {
+  const firstLine = useMemo(() => "Hi, my name is", []);
+  const nameLine = "Brittany Chiang.";
+  const secondLine = "I build things for the web.";
+  const [typedFirstLine, setTypedFirstLine] = useState("");
+  const [typedNameLine, setTypedNameLine] = useState("");
+  const [typedSecondLine, setTypedSecondLine] = useState("");
+  const [showDetails, setShowDetails] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    const timers: Array<ReturnType<typeof setTimeout>> = [];
+    let delay = 0;
+    const STEP_MS = 72;
+    const LINE_GAP_MS = 260;
+
+    for (let i = 1; i <= firstLine.length; i += 1) {
+      const value = firstLine.slice(0, i);
+      timers.push(
+        setTimeout(() => {
+          if (!cancelled) setTypedFirstLine(value);
+        }, delay),
+      );
+      delay += STEP_MS;
+    }
+
+    delay += LINE_GAP_MS;
+
+    for (let i = 1; i <= nameLine.length; i += 1) {
+      const value = nameLine.slice(0, i);
+      timers.push(
+        setTimeout(() => {
+          if (!cancelled) setTypedNameLine(value);
+        }, delay),
+      );
+      delay += STEP_MS;
+    }
+
+    delay += LINE_GAP_MS;
+
+    for (let i = 1; i <= secondLine.length; i += 1) {
+      const value = secondLine.slice(0, i);
+      timers.push(
+        setTimeout(() => {
+          if (!cancelled) setTypedSecondLine(value);
+        }, delay),
+      );
+      delay += STEP_MS;
+    }
+
+    timers.push(
+      setTimeout(() => {
+        if (!cancelled) setShowDetails(true);
+      }, delay + 140),
+    );
+
+    return () => {
+      cancelled = true;
+      timers.forEach((timer) => clearTimeout(timer));
+    };
+  }, [firstLine]);
+
   return (
     <section
       id="hero"
@@ -25,14 +82,23 @@ export function Hero({
       className="flex w-full flex-1 flex-col scroll-mt-28 pb-4 pt-2 sm:pb-8 sm:pt-4"
     >
       <div className="flex max-w-2xl flex-1 flex-col gap-8">
-        <p className="font-mono text-sm font-medium text-accent">{eyebrow}</p>
-        <h1 className="text-balance text-4xl font-semibold leading-[1.1] tracking-tight text-foreground sm:text-5xl lg:text-[3.25rem] lg:leading-[1.08]">
-          <span className="text-foreground">{titleLead}</span>{" "}
-          <span className="bg-gradient-to-r from-accent via-accent-hover to-accent bg-clip-text text-transparent">
-            {titleAccent}
+        <h1 className="text-balance">
+          <span className="block font-mono text-sm font-medium tracking-wide text-accent sm:text-base">
+            {typedFirstLine}
+          </span>
+          <span className="mt-3 block text-5xl font-semibold leading-[1.04] tracking-tight text-accent sm:text-6xl lg:text-[4.8rem]">
+            {typedNameLine}
+          </span>
+          <span className="mt-4 block text-4xl font-semibold leading-[1.08] tracking-tight text-foreground/85 sm:text-5xl lg:text-[4rem]">
+            {typedSecondLine}
           </span>
         </h1>
-        <div className="flex flex-col gap-6 border-l-2 border-accent/40 pl-5">
+        <div
+          className={
+            "flex flex-col gap-6 border-l-2 border-accent/40 pl-5 transition-opacity duration-500 " +
+            (showDetails ? "opacity-100" : "pointer-events-none opacity-0")
+          }
+        >
           {intro.map((paragraph, i) => (
             <p
               key={i}
