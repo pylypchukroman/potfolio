@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useId, useLayoutEffect, useRef, useState } from "react";
+import { useId, useState } from "react";
 import type { Experience } from "@/lib/content";
 
 type WorkExperienceProps = {
@@ -37,52 +37,9 @@ function PanelBody({ job }: { job: Experience }) {
 export function WorkExperience({ experiences }: WorkExperienceProps) {
   const baseId = useId();
   const [activeId, setActiveId] = useState(experiences[0]?.id ?? "");
-  const [panelMinHeight, setPanelMinHeight] = useState(0);
-  const panelRefs = useRef<Map<string, HTMLDivElement>>(new Map());
-  const expKey = experiences.map((e) => e.id).join("|");
 
   const active =
     experiences.find((e) => e.id === activeId) ?? experiences[0] ?? null;
-
-  const setPanelRef = useCallback(
-    (id: string) => (node: HTMLDivElement | null) => {
-      if (node) panelRefs.current.set(id, node);
-      else panelRefs.current.delete(id);
-    },
-    [],
-  );
-
-  useLayoutEffect(() => {
-    const runMeasure = () => {
-      let max = 0;
-      for (const { id } of experiences) {
-        const el = panelRefs.current.get(id);
-        if (el) max = Math.max(max, el.scrollHeight);
-      }
-      if (max > 0) {
-        setPanelMinHeight((prev) => (prev === max ? prev : max));
-      }
-    };
-
-    let raf2 = 0;
-    const raf1 = requestAnimationFrame(() => {
-      raf2 = requestAnimationFrame(runMeasure);
-    });
-
-    const ro = new ResizeObserver(() => {
-      requestAnimationFrame(runMeasure);
-    });
-    for (const { id } of experiences) {
-      const el = panelRefs.current.get(id);
-      if (el) ro.observe(el);
-    }
-
-    return () => {
-      cancelAnimationFrame(raf1);
-      cancelAnimationFrame(raf2);
-      ro.disconnect();
-    };
-  }, [expKey, experiences]);
 
   if (!active || experiences.length === 0) return null;
 
@@ -120,33 +77,12 @@ export function WorkExperience({ experiences }: WorkExperienceProps) {
 
       <div className="pt-8">
         <div
-          className="relative w-full min-h-0"
-          style={
-            panelMinHeight > 0
-              ? { minHeight: panelMinHeight }
-              : undefined
-          }
+          role="tabpanel"
+          id={`${baseId}-panel-${active.id}`}
+          aria-labelledby={`${baseId}-tab-${active.id}`}
+          className="w-full"
         >
-          {experiences.map((job) => {
-            const selected = job.id === active.id;
-            return (
-              <div
-                key={job.id}
-                ref={setPanelRef(job.id)}
-                role="tabpanel"
-                id={`${baseId}-panel-${job.id}`}
-                aria-labelledby={`${baseId}-tab-${job.id}`}
-                className={
-                  selected
-                    ? "relative z-10 w-full"
-                    : "pointer-events-none absolute inset-x-0 top-0 z-0 opacity-0 select-none"
-                }
-                aria-hidden={!selected}
-              >
-                <PanelBody job={job} />
-              </div>
-            );
-          })}
+          <PanelBody job={active} />
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { useCallback, useId, useState } from "react";
+import { useId, useState } from "react";
 import type { SkillGroup } from "@/lib/content";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -15,40 +15,6 @@ export function SkillTabs({ groups }: SkillTabsProps) {
   const reduceMotion = useReducedMotion();
   const [activeId, setActiveId] = useState(groups[0]?.id ?? "");
   const active = groups.find((g) => g.id === activeId) ?? groups[0] ?? null;
-
-  const focusTab = useCallback(
-    (id: string) => {
-      document.getElementById(`${baseId}-tab-${id}`)?.focus();
-    },
-    [baseId],
-  );
-
-  const handleTabKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
-      if (e.key === "ArrowDown") {
-        e.preventDefault();
-        const next = groups[(index + 1) % groups.length];
-        setActiveId(next.id);
-        queueMicrotask(() => focusTab(next.id));
-      } else if (e.key === "ArrowUp") {
-        e.preventDefault();
-        const next = groups[(index - 1 + groups.length) % groups.length];
-        setActiveId(next.id);
-        queueMicrotask(() => focusTab(next.id));
-      } else if (e.key === "Home") {
-        e.preventDefault();
-        const next = groups[0];
-        setActiveId(next.id);
-        queueMicrotask(() => focusTab(next.id));
-      } else if (e.key === "End") {
-        e.preventDefault();
-        const next = groups[groups.length - 1];
-        setActiveId(next.id);
-        queueMicrotask(() => focusTab(next.id));
-      }
-    },
-    [groups, focusTab],
-  );
 
   if (!active || groups.length === 0) return null;
 
@@ -96,7 +62,6 @@ export function SkillTabs({ groups }: SkillTabsProps) {
               aria-controls={`${baseId}-panel-${group.id}`}
               tabIndex={0}
               onClick={() => setActiveId(group.id)}
-              onKeyDown={(e) => handleTabKeyDown(e, index)}
               whileTap={reduceMotion ? undefined : { scale: 0.98 }}
               transition={{ type: "spring", stiffness: 520, damping: 28 }}
               className={

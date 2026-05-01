@@ -1,16 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { SocialDock } from "@/components/SocialDock";
 import {
   StaggerContainer,
   StaggerItem,
 } from "@/components/motion/Reveal";
 import type { NavItem, SocialLink } from "@/lib/content";
-
-/** Ignore scroll-spy while smooth-scrolling after a nav click (ms), if scrollend is missing */
-const SPY_PAUSE_MS = 900;
 
 type SidebarProps = {
   name: string;
@@ -20,36 +16,24 @@ type SidebarProps = {
 };
 
 function useActiveNavSection(sectionIds: readonly string[]) {
-  const idsKey = sectionIds.join(",");
   const [activeId, setActiveId] = useState("");
-  /** While Date.now() < this, scroll listener must not override the clicked item */
-  const pauseSpyUntilRef = useRef(0);
-  const measureRef = useRef<() => void>(() => {});
-  const resumeSpyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const measureFromScroll = useCallback(() => {
-    if (typeof window === "undefined") return;
-    if (Date.now() < pauseSpyUntilRef.current) return;
-
-    const ids = [...sectionIds];
-    if (ids.length === 0) return;
-
-    const marker = window.scrollY + window.innerHeight * 0.35;
-    let current: string | null = null;
-    for (const id of ids) {
-      const el = document.getElementById(id);
-      if (!el) continue;
-      const top = el.getBoundingClientRect().top + window.scrollY;
-      if (top <= marker) current = id;
-    }
-    setActiveId(current ?? "");
-  }, [sectionIds]);
 
   useEffect(() => {
-    measureRef.current = measureFromScroll;
-  }, [measureFromScroll]);
+    const measureFromScroll = () => {
+      const ids = [...sectionIds];
+      if (ids.length === 0) return;
 
-  useEffect(() => {
+      const marker = window.scrollY + window.innerHeight * 0.35;
+      let current: string | null = null;
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        if (top <= marker) current = id;
+      }
+      setActiveId(current ?? "");
+    };
+
     if (sectionIds.length === 0) return;
 
     const initial = requestAnimationFrame(() => measureFromScroll());
@@ -57,69 +41,36 @@ function useActiveNavSection(sectionIds: readonly string[]) {
     const onScroll = () => measureFromScroll();
     const onResize = () => measureFromScroll();
 
-    const onScrollEnd = () => {
-      pauseSpyUntilRef.current = 0;
-      if (resumeSpyTimerRef.current) {
-        clearTimeout(resumeSpyTimerRef.current);
-        resumeSpyTimerRef.current = null;
-      }
-      measureFromScroll();
-    };
-
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
-    window.addEventListener("scrollend", onScrollEnd);
 
     return () => {
       cancelAnimationFrame(initial);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
-      window.removeEventListener("scrollend", onScrollEnd);
     };
-  }, [idsKey, sectionIds, measureFromScroll]);
+  }, [sectionIds]);
 
-  useEffect(
-    () => () => {
-      if (resumeSpyTimerRef.current) {
-        clearTimeout(resumeSpyTimerRef.current);
-        resumeSpyTimerRef.current = null;
-      }
-    },
-    [],
-  );
-
-  const onNavLinkClick = useCallback((id: string) => {
-    if (resumeSpyTimerRef.current) {
-      clearTimeout(resumeSpyTimerRef.current);
-      resumeSpyTimerRef.current = null;
-    }
-    pauseSpyUntilRef.current = Date.now() + SPY_PAUSE_MS;
+  const onNavLinkClick = (id: string) => {
     setActiveId(id);
-    resumeSpyTimerRef.current = setTimeout(() => {
-      resumeSpyTimerRef.current = null;
-      pauseSpyUntilRef.current = 0;
-      measureRef.current();
-    }, SPY_PAUSE_MS);
-  }, []);
+  };
 
   return { activeId, onNavLinkClick };
 }
 
-function useSectionScrolledPastRatio(sectionId: string, ratio: number) {
-  const [isPastRatio, setIsPastRatio] = useState(false);
+function useShowSidebarAfterSection(sectionId: string) {
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const measure = () => {
-      const target = document.getElementById(sectionId);
-      if (!target) {
-        setIsPastRatio(false);
+      const section = document.getElementById(sectionId);
+      if (!section) {
+        setIsVisible(false);
         return;
       }
 
-      const rect = target.getBoundingClientRect();
-      const sectionHeight = Math.max(rect.height, 1);
-      const scrolledPastPx = Math.max(-rect.top, 0);
-      setIsPastRatio(scrolledPastPx / sectionHeight >= ratio);
+      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+      setIsVisible(window.scrollY >= sectionTop - 200);
     };
 
     measure();
@@ -130,9 +81,9 @@ function useSectionScrolledPastRatio(sectionId: string, ratio: number) {
       window.removeEventListener("scroll", measure);
       window.removeEventListener("resize", measure);
     };
-  }, [sectionId, ratio]);
+  }, [sectionId]);
 
-  return isPastRatio;
+  return isVisible;
 }
 
 export function Sidebar({
@@ -147,18 +98,40 @@ export function Sidebar({
   );
   const { activeId, onNavLinkClick } = useActiveNavSection(sectionIds);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isHeroScrolledPastSeventyPercent = useSectionScrolledPastRatio("hero", 0.7);
-  const isDesktopSidebarVisible = isHeroScrolledPastSeventyPercent;
+  const isDesktopSidebarVisible = useShowSidebarAfterSection("about");
+  const handleSectionNavigate = useCallback(
+    (id: string, closeMobileMenu: boolean) => {
+      const scrollToSection = () => {
+        const target = document.getElementById(id);
+        if (!target) return;
+
+        const top = target.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top, behavior: "smooth" });
+        window.history.replaceState(null, "", `#${id}`);
+      };
+
+      onNavLinkClick(id);
+      if (!closeMobileMenu) {
+        scrollToSection();
+        return;
+      }
+
+      // On mobile/tablet, wait for menu close transition before scrolling.
+      setIsMenuOpen(false);
+      window.setTimeout(scrollToSection, 260);
+    },
+    [onNavLinkClick],
+  );
 
   return (
     <>
-      <div className="fixed right-5 top-5 z-50 lg:hidden">
+      <div className="lg:hidden">
         <button
           type="button"
           aria-label="Close navigation menu"
           onClick={() => setIsMenuOpen(false)}
           className={
-            "pointer-events-none fixed inset-0 bg-background/25 backdrop-blur-sm transition-opacity duration-250 ease-out " +
+            "pointer-events-none fixed inset-0 z-40 bg-background/25 backdrop-blur-sm transition-opacity duration-250 ease-out " +
             (isMenuOpen ? "pointer-events-auto opacity-100" : "opacity-0")
           }
         />
@@ -168,7 +141,7 @@ export function Sidebar({
           aria-controls="mobile-nav"
           aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           onClick={() => setIsMenuOpen((open) => !open)}
-          className="inline-flex items-center rounded-full border border-border/70 bg-background/95 px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] text-muted shadow-[0_10px_30px_rgba(0,0,0,0.15)] backdrop-blur transition-colors duration-200 hover:border-accent/70 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+          className="fixed right-5 top-5 z-[60] inline-flex items-center rounded-full border border-border/70 bg-background/95 px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] text-muted shadow-[0_10px_30px_rgba(0,0,0,0.15)] backdrop-blur transition-colors duration-200 hover:border-accent/70 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
         >
           <span className="relative h-3.5 w-5" aria-hidden>
             <span
@@ -193,7 +166,7 @@ export function Sidebar({
         </button>
         <div
           className={
-            "pointer-events-none fixed inset-y-0 right-0 top-0 h-[100dvh] w-[70vw] origin-top-right overflow-y-auto border-l border-border/70 bg-card/95 p-5 pt-20 shadow-[0_16px_40px_rgba(0,0,0,0.2)] backdrop-blur transition-all duration-250 ease-out " +
+            "pointer-events-none fixed inset-y-0 right-0 top-0 z-50 h-[100dvh] w-[70vw] origin-top-right overflow-y-auto border-l border-border/70 bg-card/95 p-5 pt-20 shadow-[0_16px_40px_rgba(0,0,0,0.2)] backdrop-blur transition-all duration-250 ease-out " +
             (isMenuOpen
               ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
               : "-translate-y-2 scale-95 opacity-0")
@@ -218,22 +191,19 @@ export function Sidebar({
                 const isActive = activeId === item.id;
                 return (
                   <li key={item.id}>
-                    <Link
-                      href={`#${item.id}`}
-                      onClick={() => {
-                        onNavLinkClick(item.id);
-                        setIsMenuOpen(false);
-                      }}
+                    <button
+                      type="button"
+                      onClick={() => handleSectionNavigate(item.id, true)}
                       aria-current={isActive ? "location" : undefined}
                       className={
-                        "relative inline-block py-1 pl-3 transition-colors duration-200 before:absolute before:left-0 before:top-1 before:bottom-1 before:w-0.5 before:rounded-full before:transition-colors " +
+                        "relative inline-block cursor-pointer py-1 pl-3 text-left transition-colors duration-200 before:absolute before:left-0 before:top-1 before:bottom-1 before:w-0.5 before:rounded-full before:transition-colors " +
                         (isActive
                           ? "font-medium text-accent before:bg-accent"
                           : "text-muted before:bg-transparent hover:text-accent focus-visible:text-accent")
                       }
                     >
                       {item.label}
-                    </Link>
+                    </button>
                   </li>
                 );
               })}
@@ -248,7 +218,9 @@ export function Sidebar({
       <header
         className={
           "hidden flex-col gap-8 transition-opacity duration-300 lg:flex " +
-          (isDesktopSidebarVisible ? "opacity-100" : "pointer-events-none opacity-0")
+          (isDesktopSidebarVisible
+            ? "opacity-100"
+            : "pointer-events-none opacity-0")
         }
       >
         <StaggerContainer className="flex flex-col gap-4">
@@ -269,19 +241,19 @@ export function Sidebar({
                   const isActive = activeId === item.id;
                   return (
                     <li key={item.id}>
-                      <Link
-                        href={`#${item.id}`}
-                        onClick={() => onNavLinkClick(item.id)}
+                      <button
+                        type="button"
+                        onClick={() => handleSectionNavigate(item.id, false)}
                         aria-current={isActive ? "location" : undefined}
                         className={
-                          "relative inline-block py-1 pl-3 transition-colors duration-200 before:absolute before:left-0 before:top-1 before:bottom-1 before:w-0.5 before:rounded-full before:transition-colors " +
+                          "relative inline-block cursor-pointer py-1 pl-3 text-left transition-colors duration-200 before:absolute before:left-0 before:top-1 before:bottom-1 before:w-0.5 before:rounded-full before:transition-colors " +
                           (isActive
                             ? "font-medium text-accent before:bg-accent"
                             : "text-muted before:bg-transparent hover:text-accent focus-visible:text-accent")
                         }
                       >
                         {item.label}
-                      </Link>
+                      </button>
                     </li>
                   );
                 })}

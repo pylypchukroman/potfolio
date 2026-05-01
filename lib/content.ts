@@ -68,9 +68,9 @@ export type SkillGroup = {
 };
 
 export const site = {
-  title: "Alex Morgan — Portfolio",
+  title: "Roman Pylypchuk — Portfolio",
   description:
-    "Developer portfolio: projects, experience, and background. Built with Next.js.",
+    "Full-stack developer portfolio: projects, experience, and technical background.",
   url: "https://example.com",
 } as const;
 
@@ -90,8 +90,8 @@ export const hero = {
   titleAccent: "with a great mix of craft and speed.",
   /** Short paragraphs of general information */
   intro: [
-    "I care about clear interfaces, solid engineering, and shipping work that holds up over time—whether that’s a dashboard, an API, or something in between.",
-    "This site is a snapshot of who I am, what I’ve built, and the stack I like to work in.",
+    "Full-stack developer with about 2 years of experience across the JavaScript ecosystem: React and Next.js on the frontend, Node.js and Express on the backend, and MongoDB/PostgreSQL for data.",
+    "I have shipped features in a live product with 1,000+ users, built real-time systems with WebSocket, and integrated AI APIs (OpenAI and Gemini) into production-ready projects.",
   ],
   /** PDF in public/ — replace public/resume.pdf with your CV */
   resumeHref: "/resume.pdf",
@@ -120,51 +120,51 @@ export const contactSection = {
  */
 export const contact = {
   intro: [
-    "I'm open to interesting roles, collaborations, and a good conversation about product or engineering.",
-    "The fastest way to reach me is email—I usually reply within a couple of days.",
+    "I am open to full-stack and frontend/backend opportunities, freelance collaborations, and product-focused teams.",
+    "The fastest way to reach me is by email. I usually reply within a couple of days.",
   ],
-  email: "",
+  email: "romanpylypchuk@gmail.com",
   emailCta: "Say hello",
 } as const;
 
 export const about = {
-  name: "Alex Morgan",
-  headline: "Software developer",
+  name: "Roman Pylypchuk",
+  headline: "Full Stack Developer",
   /** Path under public/ — swap the file to use your photo */
   imageSrc: "/photo.jpg",
-  imageAlt: "Portrait of Alex Morgan",
+  imageAlt: "Portrait of Roman Pylypchuk",
   bio: [
-    "I build thoughtful, minimal web experiences with a focus on clarity and performance. I enjoy turning complex problems into simple interfaces.",
-    "Previously I’ve shipped product features end-to-end, collaborated with design, and cared about accessibility and maintainability.",
-    "Outside of work I contribute to small open-source tools and write short technical notes.",
+    "I build web products end-to-end, from responsive interfaces to backend APIs and data models. My core stack is TypeScript, React, Next.js, Node.js, and MongoDB/PostgreSQL.",
+    "In previous roles, I worked in small teams and as a sole developer, delivering real-world features, fixing production issues, writing tests, and keeping dependencies stable.",
+    "I also actively use AI tools in development workflows and have hands-on experience integrating OpenAI and Gemini APIs with validation and error-handling in place.",
   ],
-  location: "San Francisco, CA",
+  location: "Sydney, NSW",
   /** Grouped skills — tabs on top, bullet list below (edit labels and items) */
   skillGroups: [
     {
       id: "languages",
       label: "Languages",
-      items: ["TypeScript", "JavaScript", "Python"],
+      items: ["JavaScript", "TypeScript", "HTML", "CSS", "Node.js"],
     },
     {
       id: "frameworks",
       label: "Frameworks",
-      items: ["React", "Next.js", "Tailwind CSS"],
+      items: ["React", "Next.js", "Redux", "Tailwind CSS", "SASS", "Express.js"],
     },
     {
       id: "backend",
       label: "Backend",
-      items: ["Node.js"],
+      items: ["REST APIs", "WebSocket", "JWT", "Axios", "React Query"],
     },
     {
       id: "data",
       label: "Data",
-      items: ["PostgreSQL", "Redis"],
+      items: ["MongoDB", "PostgreSQL", "Firebase"],
     },
     {
       id: "tools",
       label: "Tools",
-      items: ["Docker", "Git", "Figma"],
+      items: ["Git", "GitHub", "npm", "Jest", "Postman", "Figma", "Jira", "Trello", "Cursor", "GitHub Copilot"],
     },
   ],
 } as const;
@@ -172,42 +172,45 @@ export const about = {
 /** Work history — tabs across the top, details below (edit for your roles) */
 export const experiences: Experience[] = [
   {
-    id: "northwind",
-    company: "Northwind Labs",
-    title: "Senior Software Engineer",
-    range: "Jan 2023 — Present",
+    id: "freelance",
+    company: "Freelance (Remote)",
+    title: "Back End Developer",
+    range: "Mar 2025 — Sep 2025",
     summary:
-      "Leading delivery for customer-facing analytics and internal platform tools.",
+      "Sole developer on a Node.js tool that tracked live price changes on a prediction market platform and delivered alerts to Slack.",
     bullets: [
-      "Owned the roadmap for a real-time metrics stack used by 40+ teams; cut p95 query time by roughly 35%.",
-      "Mentored three engineers and ran weekly design reviews on API contracts and accessibility.",
-      "Partnered with design to ship a unified component library in React and Storybook.",
+      "Built a WebSocket client to track price changes across 20 live market events simultaneously.",
+      "Implemented Axios-based market data fetching and structured storage in MongoDB for efficient querying.",
+      "Set up Slack notifications that reduced user reaction time by around 70%.",
+      "Managed deployment and production monitoring for the full backend workflow.",
     ],
   },
   {
-    id: "acme",
-    company: "Acme Product Co.",
-    title: "Software Engineer",
-    range: "Jun 2020 — Dec 2022",
+    id: "control",
+    company: "Control, Lviv, Ukraine",
+    title: "Full Stack Developer",
+    range: "Feb 2022 — Jun 2023",
     summary:
-      "Full-stack work on billing, subscriptions, and the merchant dashboard.",
+      "Part of a small dev team building a freehand web design tool used by around 1,000 active users.",
     bullets: [
-      "Implemented Stripe-based invoicing with proration, credits, and idempotent webhooks.",
-      "Built admin tooling in Next.js and PostgreSQL; added audit trails for sensitive actions.",
-      "Improved CI with parallelized tests and preview deploys on every PR.",
+      "Built object scaling and scroll-based animation features used across the editor.",
+      "Added YouTube and Vimeo embedding support as part of the core product functionality.",
+      "Wrote Jest tests for core behavior and reduced regressions during releases.",
+      "Updated multiple npm packages and resolved type and compatibility issues.",
+      "Collaborated with designers to match Figma mockups across screen sizes.",
     ],
   },
   {
-    id: "startup",
-    company: "Brightside Studio",
-    title: "Junior Developer",
-    range: "Aug 2018 — May 2020",
+    id: "mom-design",
+    company: "MOM Design, Lviv, Ukraine",
+    title: "Front End Developer",
+    range: "Jan 2023 — Apr 2023",
     summary:
-      "Early hire shipping marketing sites and light product features for clients.",
+      "Short-term role at a small design agency building responsive websites from Figma and Adobe XD mockups.",
     bullets: [
-      "Developed responsive landing pages and CMS-driven blogs for a handful of SaaS clients.",
-      "Automated asset pipelines and Lighthouse checks in the deployment workflow.",
-      "Supported production incidents and on-call rotation for hosted client properties.",
+      "Implemented pixel-accurate, responsive pages with React and Tailwind CSS.",
+      "Communicated directly with clients, gathered feedback, and shipped revisions on tight deadlines.",
+      "Kept code modular to simplify future updates and maintenance.",
     ],
   },
 ];
@@ -217,7 +220,7 @@ export const socialLinks: SocialLink[] = [
   {
     network: "linkedin",
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/yourprofile",
+    href: "https://www.linkedin.com",
   },
   {
     network: "facebook",
@@ -232,62 +235,50 @@ export const socialLinks: SocialLink[] = [
   {
     network: "github",
     label: "GitHub",
-    href: "https://github.com/yourusername",
+    href: "https://github.com",
   },
 ];
 
 export const projects: Project[] = [
   {
     eyebrow: "Featured project",
-    title: "Atlas Dashboard",
+    title: "Session-Based Balance Tracker",
     imageSrc: "/project-atlas.jpg",
-    imageAlt: "Atlas Dashboard charts and analytics UI",
+    imageAlt: "Session-Based Balance Tracker interface",
     description:
-      "Operational dashboard for monitoring jobs and alerts with real-time updates and exportable reports.",
+      "Full-stack app for tracking cash and tournament session entries with balance calculations and secure authentication.",
     descriptionRich: [
-      "A production-ready ",
-      { link: "operations hub", href: "https://example.com" },
-      " for teams who need live visibility into jobs, alerts, and exports—with role-aware views, saved filters, and ",
-      { link: "CSV reporting", href: "https://example.com" },
-      " when leadership needs the numbers fast.",
+      "Full-stack application with JWT auth using HttpOnly refresh tokens and secure token rotation. Includes Axios interceptors for automatic access token refresh and ",
+      { link: "React Query", href: "https://tanstack.com/query/latest" },
+      " for efficient server-state synchronization.",
     ],
-    href: "https://example.com",
-    repo: "https://github.com",
-    tech: ["Next.js", "TypeScript", "PostgreSQL"],
+    tech: ["React", "Node.js", "TypeScript", "MongoDB", "Tailwind CSS", "JWT"],
     year: "2025",
   },
   {
     eyebrow: "Featured project",
-    title: "River API",
+    title: "Polymarket Statistic Collector",
     imageSrc: "/project-river.jpg",
-    imageAlt: "Code on a laptop screen",
+    imageAlt: "Polymarket statistics collector backend",
     description:
-      "REST and webhook API for event ingestion with idempotency, retries, and observability.",
+      "Node.js service that collects and stores prediction market data with live updates and event-based processing.",
     descriptionRich: [
-      "Event ingestion API with idempotent writes, automatic retries, and ",
-      { link: "OpenTelemetry", href: "https://opentelemetry.io" },
-      " tracing—built for high throughput without losing a single message.",
+      "Built for personal research with live data scripts, WebSocket event tracking, and a MongoDB schema designed for efficient retrieval and analysis.",
     ],
-    href: "https://example.com",
-    repo: "https://github.com",
-    tech: ["Node.js", "Redis", "OpenTelemetry"],
-    year: "2024",
+    tech: ["Node.js", "TypeScript", "WebSocket", "Axios", "MongoDB", "Slack API"],
+    year: "2025",
   },
   {
     eyebrow: "Featured project",
-    title: "Compass Mobile",
+    title: "Smart Hashtag Generator",
     imageSrc: "/project-compass.jpg",
-    imageAlt: "Mobile app on a phone",
+    imageAlt: "Smart Hashtag Generator web app",
     description:
-      "Cross-platform field companion with offline-first sync and map overlays.",
+      "Responsive web app that generates social hashtags using OpenAI API and improves post workflow speed.",
     descriptionRich: [
-      "Offline-first ",
-      { link: "React Native", href: "https://reactnative.dev" },
-      " app for crews in low-connectivity areas—map overlays, queued sync, and SQLite-backed drafts until you are back online.",
+      "Generates configurable hashtag sets from user prompts with one-click clipboard copy and fully responsive UI for desktop and mobile usage.",
     ],
-    href: "https://example.com",
-    repo: "https://github.com",
-    tech: ["React Native", "SQLite", "Maps"],
+    tech: ["React", "SASS", "OpenAI API"],
     year: "2024",
   },
 ];
@@ -298,58 +289,51 @@ export const projects: Project[] = [
  */
 export const moreProjects: MiniProject[] = [
   {
-    id: "lintkit",
-    title: "LintKit",
+    id: "youtube-vimeo-embed",
+    title: "Editor Embed Support",
     description:
-      "Small CLI that applies opinionated ESLint/Prettier defaults and keeps teams consistent across repos.",
-    repo: "https://github.com",
+      "Added YouTube and Vimeo embedding support in a production web design editor used by 1,000+ active users.",
   },
   {
-    id: "notes",
-    title: "Notes Sync",
+    id: "object-scaling-animation",
+    title: "Scaling & Scroll Animations",
     description:
-      "Minimal note app with offline-first sync and conflict resolution for spotty networks.",
-    href: "https://example.com",
+      "Built object scaling and scroll-based animation features in a collaborative design tool.",
   },
   {
-    id: "image-pipe",
-    title: "Image Pipeline",
+    id: "websocket-monitoring-tool",
+    title: "Real-Time Market Monitor",
     description:
-      "Build-time image optimization pipeline with responsive sizing and cache-friendly fingerprints.",
+      "Sole-built backend utility tracking 20 simultaneous live events and pushing Slack alerts on market changes.",
   },
   {
-    id: "cacheview",
-    title: "CacheView",
+    id: "secure-auth-flow",
+    title: "Secure Session Auth Flow",
     description:
-      "Tiny web UI for inspecting Redis keys, TTLs, and hit rates while debugging caching behavior.",
-    href: "https://example.com",
-    repo: "https://github.com",
+      "Implemented JWT + HttpOnly refresh token rotation with Axios interceptors for seamless authenticated UX.",
   },
   {
-    id: "formsprint",
-    title: "FormSprint",
+    id: "ai-api-integration",
+    title: "AI API Integrations",
     description:
-      "Accessible form components + validation helpers with great defaults and minimal bundle cost.",
-    repo: "https://github.com",
+      "Integrated OpenAI and Gemini APIs into projects with prompt handling, response parsing, and error management.",
   },
   {
-    id: "statuspulse",
-    title: "StatusPulse",
+    id: "responsive-client-sites",
+    title: "Responsive Client Websites",
     description:
-      "Simple incident/status page with RSS updates, uptime graphs, and a lightweight admin workflow.",
-    href: "https://example.com",
+      "Delivered multiple responsive websites from Figma/Adobe XD mockups while handling direct client feedback.",
   },
   {
-    id: "snipshare",
-    title: "SnipShare",
+    id: "testing-regression-guard",
+    title: "Jest Regression Coverage",
     description:
-      "Pastebin-style snippet sharing with expiring links, syntax highlighting, and private notes.",
-    repo: "https://github.com",
+      "Added Jest tests for core editor features to catch regressions early in a live product workflow.",
   },
   {
-    id: "meetmint",
-    title: "MeetMint",
+    id: "dependency-modernization",
+    title: "Dependency Upgrades",
     description:
-      "Meeting notes helper that turns action items into tasks and exports to Markdown.",
+      "Upgraded npm dependencies and resolved type/compatibility issues in an actively used product codebase.",
   },
 ] as const;

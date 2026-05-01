@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
 type HeroProps = {
   intro: readonly string[];
@@ -14,90 +14,58 @@ export function Hero({
   resumeHref,
   resumeLabel = "Résumé",
 }: HeroProps) {
-  const firstLine = useMemo(() => "Hi, my name is", []);
-  const nameLine = "Brittany Chiang.";
-  const secondLine = "I build things for the web.";
-  const [typedFirstLine, setTypedFirstLine] = useState("");
-  const [typedNameLine, setTypedNameLine] = useState("");
-  const [typedSecondLine, setTypedSecondLine] = useState("");
-  const [showDetails, setShowDetails] = useState(false);
-
-  useEffect(() => {
-    let cancelled = false;
-    const timers: Array<ReturnType<typeof setTimeout>> = [];
-    let delay = 0;
-    const STEP_MS = 72;
-    const LINE_GAP_MS = 260;
-
-    for (let i = 1; i <= firstLine.length; i += 1) {
-      const value = firstLine.slice(0, i);
-      timers.push(
-        setTimeout(() => {
-          if (!cancelled) setTypedFirstLine(value);
-        }, delay),
-      );
-      delay += STEP_MS;
-    }
-
-    delay += LINE_GAP_MS;
-
-    for (let i = 1; i <= nameLine.length; i += 1) {
-      const value = nameLine.slice(0, i);
-      timers.push(
-        setTimeout(() => {
-          if (!cancelled) setTypedNameLine(value);
-        }, delay),
-      );
-      delay += STEP_MS;
-    }
-
-    delay += LINE_GAP_MS;
-
-    for (let i = 1; i <= secondLine.length; i += 1) {
-      const value = secondLine.slice(0, i);
-      timers.push(
-        setTimeout(() => {
-          if (!cancelled) setTypedSecondLine(value);
-        }, delay),
-      );
-      delay += STEP_MS;
-    }
-
-    timers.push(
-      setTimeout(() => {
-        if (!cancelled) setShowDetails(true);
-      }, delay + 140),
-    );
-
-    return () => {
-      cancelled = true;
-      timers.forEach((timer) => clearTimeout(timer));
-    };
-  }, [firstLine]);
+  const reduceMotion = useReducedMotion();
+  const firstLine = "Hi, my name is";
+  const nameLine = "Roman Pylypchuk.";
+  const secondLine = "I build full-stack products for the web.";
+  const ease = [0.22, 1, 0.36, 1] as const;
 
   return (
-    <section
+    <motion.section
       id="hero"
       aria-label="Introduction"
       className="flex w-full flex-1 flex-col scroll-mt-28 pb-4 pt-2 sm:pb-8 sm:pt-4"
+      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={reduceMotion ? { duration: 0 } : { duration: 1.4, ease }}
     >
       <div className="flex max-w-2xl flex-1 flex-col gap-8">
-        <h1 className="text-balance">
-          <span className="block font-mono text-sm font-medium tracking-wide text-accent sm:text-base">
-            {typedFirstLine}
-          </span>
-          <span className="mt-3 block text-5xl font-semibold leading-[1.04] tracking-tight text-accent sm:text-6xl lg:text-[4.8rem]">
-            {typedNameLine}
-          </span>
-          <span className="mt-4 block text-4xl font-semibold leading-[1.08] tracking-tight text-foreground/85 sm:text-5xl lg:text-[4rem]">
-            {typedSecondLine}
-          </span>
-        </h1>
-        <div
-          className={
-            "flex flex-col gap-6 border-l-2 border-accent/40 pl-5 transition-opacity duration-500 " +
-            (showDetails ? "opacity-100" : "pointer-events-none opacity-0")
-          }
+        <motion.h1
+          className="text-balance"
+          initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 1.1, delay: 0.16, ease }}
+        >
+          <motion.span
+            className="block font-mono text-sm font-medium tracking-wide text-accent sm:text-base"
+            initial={reduceMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.7, delay: 0.28 }}
+          >
+            {firstLine}
+          </motion.span>
+          <motion.span
+            className="mt-3 block text-5xl font-semibold leading-[1.04] tracking-tight text-accent sm:text-6xl lg:text-[4.8rem]"
+            initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.9, delay: 0.4, ease }}
+          >
+            {nameLine}
+          </motion.span>
+          <motion.span
+            className="mt-4 block text-4xl font-semibold leading-[1.08] tracking-tight text-foreground/85 sm:text-5xl lg:text-[4rem]"
+            initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.9, delay: 0.56, ease }}
+          >
+            {secondLine}
+          </motion.span>
+        </motion.h1>
+        <motion.div
+          className="flex flex-col gap-6 border-l-2 border-accent/40 pl-5"
+          initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 1.1, delay: 0.68, ease }}
         >
           {intro.map((paragraph, i) => (
             <p
@@ -129,8 +97,8 @@ export function Hero({
               </svg>
             </a>
           ) : null}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
