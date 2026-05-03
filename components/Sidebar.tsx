@@ -107,7 +107,6 @@ export function Sidebar({
 
         const top = target.getBoundingClientRect().top + window.scrollY;
         window.scrollTo({ top, behavior: "smooth" });
-        window.history.replaceState(null, "", `#${id}`);
       };
 
       onNavLinkClick(id);
