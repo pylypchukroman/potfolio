@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f1f5f9;
-  --foreground: #0f172a;
-  --muted: #64748b;
-  --accent: #0d9488;
-  --accent-hover: #0f766e;
-  --border: #e2e8f0;
-  --card: #ffffff;
+  --background: #00272c;
+  --foreground: #e8f5f4;
+  --muted: #88aeb3;
+  --accent: #e1ff51;
+  --accent-hover: #f0ff8a;
+  --border: #1f454c;
+  --card: #043338;
   /* Overlapping project description panel — solid (opaque) so text stays readable over the image */
-  --project-panel: #ffffff;
-  --project-panel-border: #cbd5e1;
+  /* Overlapping project blurb — a step above page bg so it reads like the reference card */
+  --project-panel: #0a4349;
+  --project-panel-border: #2f5c63;
 }
 
 @theme inline {
@@ -29,6 +30,7 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 @media (prefers-reduced-motion: reduce) {
