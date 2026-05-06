@@ -77,12 +77,14 @@ type ProjectMetaColumnProps = {
   project: Project;
   align: "left" | "right";
   overlapClass: string;
+  className?: string;
 };
 
 function ProjectMetaColumn({
   project,
   align,
   overlapClass,
+  className,
 }: ProjectMetaColumnProps) {
   const isLeft = align === "left";
 
@@ -91,6 +93,7 @@ function ProjectMetaColumn({
       className={
         "relative z-10 flex w-full min-w-0 flex-col lg:mt-0 lg:w-[min(100%,44%)] lg:max-w-lg lg:shrink-0 " +
         overlapClass +
+        (className ? ` ${className}` : "") +
         (isLeft
           ? " lg:items-start lg:self-start lg:text-left lg:pr-2"
           : " lg:items-end lg:self-start lg:text-right lg:pl-2")
@@ -172,11 +175,16 @@ function ProjectMetaColumn({
 
 type ProjectImageColumnProps = {
   project: Project;
+  className?: string;
 };
 
-function ProjectImageColumn({ project }: ProjectImageColumnProps) {
+function ProjectImageColumn({ project, className }: ProjectImageColumnProps) {
   return (
-    <div className="relative z-0 w-full min-w-0 lg:flex-1">
+    <div
+      className={
+        "relative z-0 w-full min-w-0 lg:flex-1" + (className ? ` ${className}` : "")
+      }
+    >
       <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border/50 bg-muted/10 shadow-[0_24px_50px_-28px_rgba(0,0,0,0.45)] sm:aspect-[16/11] lg:aspect-[16/10]">
         <Image
           src={project.imageSrc}
@@ -209,31 +217,26 @@ export function ProjectList({ projects }: ProjectListProps) {
       {projects.map((project, index) => {
         /** Even: reference layout — copy left, screenshot right, panel overlaps image. Odd: mirrored. */
         const textLeftImageRight = index % 2 === 0;
+        const metaAlign = textLeftImageRight ? ("left" as const) : ("right" as const);
+        const metaOverlap = textLeftImageRight
+          ? "lg:-mr-12 xl:-mr-24 2xl:-mr-32"
+          : "lg:-ml-12 xl:-ml-24 2xl:-ml-32";
 
         return (
           <li key={project.title}>
             <Reveal delay={index * 0.06}>
               <article className="group relative">
                 <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-0">
-                  {textLeftImageRight ? (
-                    <>
-                      <ProjectMetaColumn
-                        project={project}
-                        align="left"
-                        overlapClass="lg:-mr-12 xl:-mr-24 2xl:-mr-32"
-                      />
-                      <ProjectImageColumn project={project} />
-                    </>
-                  ) : (
-                    <>
-                      <ProjectImageColumn project={project} />
-                      <ProjectMetaColumn
-                        project={project}
-                        align="right"
-                        overlapClass="lg:-ml-12 xl:-ml-24 2xl:-ml-32"
-                      />
-                    </>
-                  )}
+                  <ProjectMetaColumn
+                    project={project}
+                    align={metaAlign}
+                    overlapClass={metaOverlap}
+                    className={textLeftImageRight ? "lg:order-1" : "lg:order-2"}
+                  />
+                  <ProjectImageColumn
+                    project={project}
+                    className={textLeftImageRight ? "lg:order-2" : "lg:order-1"}
+                  />
                 </div>
               </article>
             </Reveal>

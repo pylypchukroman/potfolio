@@ -293,47 +293,55 @@ export const moreProjects: MiniProject[] = [
     title: "Editor Embed Support",
     description:
       "Added YouTube and Vimeo embedding support in a production web design editor used by 1,000+ active users.",
+    repo: "https://github.com/yourprofile/youtube-vimeo-embed",
   },
   {
     id: "object-scaling-animation",
     title: "Scaling & Scroll Animations",
     description:
       "Built object scaling and scroll-based animation features in a collaborative design tool.",
+    repo: "https://github.com/yourprofile/object-scaling-animation",
   },
   {
     id: "websocket-monitoring-tool",
     title: "Real-Time Market Monitor",
     description:
       "Sole-built backend utility tracking 20 simultaneous live events and pushing Slack alerts on market changes.",
+    repo: "https://github.com/yourprofile/websocket-monitoring-tool",
   },
   {
     id: "secure-auth-flow",
     title: "Secure Session Auth Flow",
     description:
       "Implemented JWT + HttpOnly refresh token rotation with Axios interceptors for seamless authenticated UX.",
+    repo: "https://github.com/yourprofile/secure-auth-flow",
   },
   {
     id: "ai-api-integration",
     title: "AI API Integrations",
     description:
       "Integrated OpenAI and Gemini APIs into projects with prompt handling, response parsing, and error management.",
+    repo: "https://github.com/yourprofile/ai-api-integration",
   },
   {
     id: "responsive-client-sites",
     title: "Responsive Client Websites",
     description:
       "Delivered multiple responsive websites from Figma/Adobe XD mockups while handling direct client feedback.",
+    repo: "https://github.com/yourprofile/responsive-client-sites",
   },
   {
     id: "testing-regression-guard",
     title: "Jest Regression Coverage",
     description:
       "Added Jest tests for core editor features to catch regressions early in a live product workflow.",
+    repo: "https://github.com/yourprofile/testing-regression-guard",
   },
   {
     id: "dependency-modernization",
     title: "Dependency Upgrades",
     description:
       "Upgraded npm dependencies and resolved type/compatibility issues in an actively used product codebase.",
+    repo: "https://github.com/yourprofile/dependency-modernization",
   },
 ] as const;

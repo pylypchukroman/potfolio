@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useState } from "react";
+import { useId, useState } from "react";
 import type { MiniProject } from "@/lib/content";
 
 type MoreProjectsTickerProps = {
@@ -9,7 +9,6 @@ type MoreProjectsTickerProps = {
 };
 
 const ease = [0.22, 1, 0.36, 1] as const;
-const itemViewport = { once: true, amount: 0.8 } as const;
 
 function ExternalIcon({ className }: { className?: string }) {
   return (
@@ -49,6 +48,7 @@ function GitHubIcon({ className }: { className?: string }) {
 
 export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
   const reduce = useReducedMotion();
+  const baseId = useId();
   const safeProjects = projects.filter((p) => p.title.trim().length > 0);
   const [activeId, setActiveId] = useState<string>(safeProjects[0]?.id ?? "");
 
@@ -64,96 +64,101 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
         </p>
       </div>
 
-      <div className="flex flex-col gap-6 rounded-xl bg-card/60 p-4 sm:p-5">
-        <div className="relative -mx-1 min-w-0">
-          <ul
-            className="flex snap-x snap-proximity gap-2 overflow-x-auto overflow-y-hidden overscroll-x-contain px-1 pb-2 [scrollbar-width:thin] [-webkit-overflow-scrolling:touch]"
-            aria-label="More projects list"
+      <div className="rounded-xl bg-card/60 p-4 sm:p-5 md:p-7">
+        <div className="flex flex-col gap-8 md:flex-row md:gap-16">
+          <div
+            role="tablist"
+            aria-label="More projects"
+            className="flex overflow-x-auto border-b border-border md:w-64 md:flex-col md:overflow-visible md:border-b-0 md:border-l md:border-border"
           >
-            {safeProjects.map((p, index) => {
-              const isActive = active?.id === p.id;
-
+            {safeProjects.map((p) => {
+              const selected = active?.id === p.id;
               return (
-                <motion.li
+                <button
                   key={p.id}
-                  className="shrink-0 snap-start"
-                  initial={reduce ? false : { opacity: 0, y: 10 }}
-                  whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-                  viewport={itemViewport}
-                  transition={
-                    reduce
-                      ? { duration: 0 }
-                      : { duration: 0.45, delay: index * 0.06, ease }
+                  type="button"
+                  role="tab"
+                  id={`${baseId}-tab-${p.id}`}
+                  aria-selected={selected}
+                  aria-controls={`${baseId}-panel-${p.id}`}
+                  tabIndex={selected ? 0 : -1}
+                  onClick={() => setActiveId(p.id)}
+                  onMouseEnter={() => setActiveId(p.id)}
+                  onFocus={() => setActiveId(p.id)}
+                  className={
+                    "group relative shrink-0 cursor-pointer whitespace-nowrap px-4 py-3 text-left font-mono text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:ring-offset-2 focus-visible:ring-offset-background " +
+                    // mobile: underline indicator
+                    "border-b-2 md:border-b-0 md:pl-6 md:pr-4 " +
+                    // desktop: left indicator
+                    "md:before:absolute md:before:left-0 md:before:top-0 md:before:h-full md:before:w-0.5 md:before:rounded-full " +
+                    (selected
+                      ? "border-accent text-accent md:before:bg-accent"
+                      : "border-transparent text-muted hover:text-foreground md:before:bg-transparent")
                   }
                 >
-                  <button
-                    type="button"
-                    onClick={() => setActiveId(p.id)}
-                    onMouseEnter={() => setActiveId(p.id)}
-                    onFocus={() => setActiveId(p.id)}
-                    className={
-                      "relative inline-flex h-10 cursor-pointer items-center whitespace-nowrap rounded-lg py-1 pl-3 pr-3 text-left font-mono text-sm transition-[color,background-color,opacity] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:ring-offset-2 focus-visible:ring-offset-background " +
-                      (isActive
-                        ? "bg-accent/12 font-medium text-accent"
-                        : "bg-transparent text-foreground/36 hover:bg-accent/8 hover:text-foreground/52")
-                    }
-                  >
-                    <span className="pl-1">{p.title}</span>
-                  </button>
-                </motion.li>
+                  <span className="flex items-center justify-between gap-3">
+                    <span className="truncate">{p.title}</span>
+                  </span>
+                </button>
               );
             })}
-          </ul>
-        </div>
+          </div>
 
-        <div className="flex min-h-56 sm:min-h-72">
-          <AnimatePresence mode="wait" initial={false}>
-            {active ? (
-              <motion.div
-                key={active.id}
-                initial={reduce ? false : { opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={reduce ? undefined : { opacity: 0, y: 6 }}
-                transition={reduce ? { duration: 0 } : { duration: 0.35, ease }}
-                className="flex w-full flex-col justify-between rounded-lg border border-border bg-background/60 p-4"
-              >
-                <div className="flex flex-col gap-3">
+          <div className="min-w-0 flex-1 md:pl-6">
+            <AnimatePresence mode="wait" initial={false}>
+              {active ? (
+                <motion.div
+                  key={active.id}
+                  role="tabpanel"
+                  id={`${baseId}-panel-${active.id}`}
+                  aria-labelledby={`${baseId}-tab-${active.id}`}
+                  initial={reduce ? false : { opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reduce ? undefined : { opacity: 0, y: 6 }}
+                  transition={reduce ? { duration: 0 } : { duration: 0.35, ease }}
+                  className="min-h-56 sm:min-h-72"
+                >
                   <div className="min-w-0">
-                    <p className="font-mono text-sm font-medium text-foreground">
-                      {active.title}
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-muted">
+                    <div className="flex min-w-0 items-start justify-between gap-4">
+                      <h3 className="min-w-0 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+                        {active.title}
+                      </h3>
+                    </div>
+                    <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
                       {active.description}
                     </p>
                   </div>
-                  <div className="flex flex-wrap gap-x-4 gap-y-2 pt-1">
-                    {active.href ? (
-                      <a
-                        href={active.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 font-mono text-sm text-muted transition-colors hover:text-accent focus-visible:text-accent"
-                      >
-                        <ExternalIcon className="h-4 w-4" />
-                        Live
-                      </a>
-                    ) : null}
-                    {active.repo ? (
-                      <a
-                        href={active.repo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 font-mono text-sm text-muted transition-colors hover:text-accent focus-visible:text-accent"
-                      >
-                        <GitHubIcon className="h-4 w-4" />
-                        GitHub
-                      </a>
-                    ) : null}
-                  </div>
-                </div>
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
+
+                  {(active.href || active.repo) && (
+                    <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3">
+                      {active.href ? (
+                        <a
+                          href={active.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 font-mono text-sm text-muted transition-colors hover:text-accent focus-visible:text-accent"
+                        >
+                          <ExternalIcon className="h-4 w-4" />
+                          Live
+                        </a>
+                      ) : null}
+                      {active.repo ? (
+                        <a
+                          href={active.repo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 font-mono text-sm text-muted transition-colors hover:text-accent focus-visible:text-accent"
+                        >
+                          <GitHubIcon className="h-4 w-4" />
+                          GitHub
+                        </a>
+                      ) : null}
+                    </div>
+                  )}
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </div>

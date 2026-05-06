@@ -53,7 +53,7 @@ export function PortfolioPage() {
           <main
             id="content"
             tabIndex={-1}
-            className="min-w-0 scroll-mt-28 outline-none"
+            className="min-w-0 scroll-mt-0 outline-none"
           >
             <div className="flex flex-col gap-20 lg:gap-24">
               <div className="flex min-h-[100dvh] w-full flex-col">
@@ -67,6 +67,7 @@ export function PortfolioPage() {
               <Section
                 id="about"
                 title="About"
+                index="01"
                 className="flex min-h-[100dvh] w-full flex-1 flex-col"
               >
                 <About

@@ -70,7 +70,7 @@ export function Section({
     <motion.section
       id={id}
       aria-labelledby={`${id}-heading`}
-      className={`scroll-mt-28 ${className}`}
+      className={`scroll-mt-0 ${className}`}
       initial="hidden"
       whileInView="visible"
       viewport={sectionViewport}
