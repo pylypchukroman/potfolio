@@ -83,12 +83,6 @@ export const navigation: NavItem[] = [
 
 /** Hero — headline and general intro above the About section */
 export const hero = {
-  eyebrow: "Hello, I'm",
-  /** First part of the main headline (plain) */
-  titleLead: "I build thoughtful software",
-  /** Accent part of the headline (gradient) */
-  titleAccent: "with a great mix of craft and speed.",
-  /** Short paragraphs of general information */
   intro: [
     "Full-stack developer with about 2 years of experience across the JavaScript ecosystem: React and Next.js on the frontend, Node.js and Express on the backend, and MongoDB/PostgreSQL for data.",
     "I have shipped features in a live product with 1,000+ users, built real-time systems with WebSocket, and integrated AI APIs (OpenAI and Gemini) into production-ready projects.",

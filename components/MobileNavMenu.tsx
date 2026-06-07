@@ -122,7 +122,7 @@ export function MobileNavMenu({
           />
         </nav>
         <div className="mt-4 border-t border-border/60 pt-3">
-          <SocialDock links={socialLinks} mode="inline" />
+          <SocialDock links={socialLinks} />
         </div>
       </div>
     </div>

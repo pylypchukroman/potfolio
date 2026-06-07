@@ -62,7 +62,7 @@ export function DesktopSidebar({
           </nav>
         </StaggerItem>
         <StaggerItem>
-          <SocialDock links={socialLinks} mode="inline" />
+          <SocialDock links={socialLinks} />
         </StaggerItem>
       </StaggerContainer>
     </header>

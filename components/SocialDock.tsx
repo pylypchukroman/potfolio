@@ -2,12 +2,6 @@
 
 import type { SocialLink } from "@/lib/content";
 
-const stroke = {
-  width: 1.25,
-  cap: "round" as const,
-  join: "round" as const,
-};
-
 function Icon({
   network,
   className,
@@ -15,14 +9,13 @@ function Icon({
   network: SocialLink["network"];
   className?: string;
 }) {
-  const cn = className ?? "h-4 w-4";
   const common = {
-    className: cn,
+    className: className ?? "h-4 w-4",
     fill: "none" as const,
     stroke: "currentColor",
-    strokeWidth: stroke.width,
-    strokeLinecap: stroke.cap,
-    strokeLinejoin: stroke.join,
+    strokeWidth: 1.25,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
     "aria-hidden": true as const,
   };
 
@@ -61,53 +54,23 @@ function Icon({
 
 type SocialDockProps = {
   links: SocialLink[];
-  mode?: "floating" | "inline";
 };
 
-export function SocialDock({ links, mode = "floating" }: SocialDockProps) {
-  if (mode === "inline") {
-    return (
-      <nav aria-label="Social profiles" className="flex items-center gap-3">
-        {links.map((link) => (
-          <a
-            key={link.network}
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={link.label}
-            className="inline-flex min-h-9 min-w-9 items-center justify-center text-muted transition-colors duration-200 hover:text-accent focus-visible:text-accent"
-          >
-            <Icon network={link.network} />
-          </a>
-        ))}
-      </nav>
-    );
-  }
-
+export function SocialDock({ links }: SocialDockProps) {
   return (
-    <div className="pointer-events-none fixed bottom-0 left-2 z-50 flex w-5 flex-col items-center max-sm:left-1.5">
-      <nav
-        aria-label="Social profiles"
-        className="pointer-events-auto mb-3 flex flex-col items-center gap-4"
-      >
-        {links.map((link) => (
-          <a
-            key={link.network}
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={link.label}
-            className="inline-flex min-h-9 min-w-9 items-center justify-center text-muted transition-colors duration-200 hover:text-accent focus-visible:text-accent"
-          >
-            <Icon network={link.network} />
-          </a>
-        ))}
-      </nav>
-      {/* Short rail: grows upward from the bottom edge of the viewport (not from the top) */}
-      <div
-        className="h-20 w-px shrink-0 bg-muted/70 max-sm:h-16"
-        aria-hidden
-      />
-    </div>
+    <nav aria-label="Social profiles" className="flex items-center gap-3">
+      {links.map((link) => (
+        <a
+          key={link.network}
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={link.label}
+          className="inline-flex min-h-9 min-w-9 items-center justify-center text-muted transition-colors duration-200 hover:text-accent focus-visible:text-accent"
+        >
+          <Icon network={link.network} />
+        </a>
+      ))}
+    </nav>
   );
 }
