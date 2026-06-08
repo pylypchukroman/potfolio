@@ -17,7 +17,7 @@ export function Hero({
   const reduceMotion = useReducedMotion();
   const firstLine = "Hi, my name is";
   const nameLine = "Roman Pylypchuk.";
-  const secondLine = "I build full-stack products for the web.";
+  const secondLine = "I turn ideas into full-stack web products.";
   const ease = [0.22, 1, 0.36, 1] as const;
 
   return (

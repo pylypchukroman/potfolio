@@ -84,8 +84,8 @@ export const navigation: NavItem[] = [
 /** Hero — headline and general intro above the About section */
 export const hero = {
   intro: [
-    "Full-stack developer with about 2 years of experience across the JavaScript ecosystem: React and Next.js on the frontend, Node.js and Express on the backend, and MongoDB/PostgreSQL for data.",
-    "I have shipped features in a live product with 1,000+ users, built real-time systems with WebSocket, and integrated AI APIs (OpenAI and Gemini) into production-ready projects.",
+    "I'm a full-stack developer based in Sydney who gets a kick out of building things that work. There's something satisfying about taking a rough idea, working through the hard parts, and ending up with a product that actually does what it's supposed to.",
+    "I mostly work in the JavaScript ecosystem: React and Next.js on the front end, Node.js on the back end.",
   ],
   /** PDF in public/ — replace public/resume.pdf with your CV */
   resumeHref: "/resume.pdf",
@@ -123,14 +123,14 @@ export const contact = {
 
 export const about = {
   name: "Roman Pylypchuk",
-  headline: "Full Stack Developer",
+  headline: "Full-Stack Developer",
   /** Path under public/ — swap the file to use your photo */
   imageSrc: "/photo.jpg",
   imageAlt: "Portrait of Roman Pylypchuk",
   bio: [
-    "I build web products end-to-end, from responsive interfaces to backend APIs and data models. My core stack is TypeScript, React, Next.js, Node.js, and MongoDB/PostgreSQL.",
-    "In previous roles, I worked in small teams and as a sole developer, delivering real-world features, fixing production issues, writing tests, and keeping dependencies stable.",
-    "I also actively use AI tools in development workflows and have hands-on experience integrating OpenAI and Gemini APIs with validation and error-handling in place.",
+    "Hello! My name is Roman, and I enjoy building things that work on the internet. My interest in web development started in 2022 when I completed a bootcamp and learned that I really liked solving problems and shipping things that actually matter.",
+    "Fast-forward to today, and I've had the privilege of working at a product company, a design studio, and launching solo freelance projects. I've built features for products with real users, worked in small teams on complex problems, and learned what it takes to ship something people care about. Right now I'm studying at TAFE NSW while taking on freelance work.",
+    "My main focus these days is building full-stack web products with clean code and attention to detail. I'm particularly drawn to real-time systems and projects that involve integrating AI APIs. I work mostly with React, Next.js, Node.js, and MongoDB/PostgreSQL.",
   ],
   location: "Sydney, NSW",
   /** Grouped skills — tabs on top, bullet list below (edit labels and items) */
@@ -143,22 +143,22 @@ export const about = {
     {
       id: "frameworks",
       label: "Frameworks",
-      items: ["React", "Next.js", "Redux", "Tailwind CSS", "SASS", "Express.js"],
+      items: ["React", "Next.js", "Tailwind CSS"],
     },
     {
       id: "backend",
       label: "Backend",
-      items: ["REST APIs", "WebSocket", "JWT", "Axios", "React Query"],
+      items: ["REST APIs", "WebSocket"],
     },
     {
       id: "data",
       label: "Data",
-      items: ["MongoDB", "PostgreSQL", "Firebase"],
+      items: ["MongoDB", "PostgreSQL"],
     },
     {
       id: "tools",
       label: "Tools",
-      items: ["Git", "GitHub", "npm", "Jest", "Postman", "Figma", "Jira", "Trello", "Cursor", "GitHub Copilot"],
+      items: ["Git", "GitHub"],
     },
   ],
 } as const;
@@ -167,7 +167,7 @@ export const about = {
 export const experiences: Experience[] = [
   {
     id: "freelance",
-    company: "Freelance (Remote)",
+    company: "Freelance",
     title: "Back End Developer",
     range: "Mar 2025 — Sep 2025",
     summary:
@@ -181,7 +181,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "control",
-    company: "Control, Lviv, Ukraine",
+    company: "Control",
     title: "Full Stack Developer",
     range: "Feb 2022 — Jun 2023",
     summary:
@@ -196,7 +196,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "mom-design",
-    company: "MOM Design, Lviv, Ukraine",
+    company: "MOM Design",
     title: "Front End Developer",
     range: "Jan 2023 — Apr 2023",
     summary:

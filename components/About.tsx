@@ -53,7 +53,7 @@ export function About({
           <Reveal delay={(bio.length + 1) * 0.05}>
             <div>
               <h3 className="font-mono text-sm font-medium uppercase tracking-widest text-muted">
-                Skills
+                Tech Stack
               </h3>
               <div className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3">
                 {skillColumns.map((column, columnIndex) => (
