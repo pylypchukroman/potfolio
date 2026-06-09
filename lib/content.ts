@@ -52,6 +52,7 @@ export type Experience = {
   /** Stable id for tabs (e.g. acme) */
   id: string;
   company: string;
+  url: string;
   title: string;
   range: string;
   /** Optional short blurb above the bullets */
@@ -114,8 +115,8 @@ export const contactSection = {
  */
 export const contact = {
   intro: [
-    "I am open to full-stack and frontend/backend opportunities, freelance collaborations, and product-focused teams.",
-    "The fastest way to reach me is by email. I usually reply within a couple of days.",
+    "I'm always open to new opportunities — whether it's a full-stack position, frontend or backend work, or a freelance collaboration. ",
+    "Feel free to reach out if you have a project in mind or just want to connect. I'll get back to you as soon as I can!",
   ],
   email: "romanpylypchuk@gmail.com",
   emailCta: "Say hello",
@@ -168,43 +169,47 @@ export const experiences: Experience[] = [
   {
     id: "freelance",
     company: "Freelance",
+    url: "https://www.linkedin.com/in/roman-pylypchuk-dev/",
     title: "Back End Developer",
-    range: "Mar 2025 — Sep 2025",
+    range: "Mar 2025 — Present",
     summary:
-      "Sole developer on a Node.js tool that tracked live price changes on a prediction market platform and delivered alerts to Slack.",
+      "Worked on freelance backend projects: building real-time data pipelines, designing APIs, and setting up automated notification systems. Handled everything from data modeling to deployment and production monitoring.",
     bullets: [
-      "Built a WebSocket client to track price changes across 20 live market events simultaneously.",
-      "Implemented Axios-based market data fetching and structured storage in MongoDB for efficient querying.",
-      "Set up Slack notifications that reduced user reaction time by around 70%.",
-      "Managed deployment and production monitoring for the full backend workflow.",
+      "Built RESTful APIs and real-time WebSocket integrations for processing live data streams.",
+      "Implemented backend data flows: fetching, processing, and storing live data in MongoDB.",
+      "Set up automated Slack notifications that improved response times for end users.",
+      "Integrated third-party APIs and services, including OpenAI and Gemini, into production workflows.",
     ],
   },
   {
     id: "control",
     company: "Control",
+    url: "https://cntrl.site/",
     title: "Full Stack Developer",
     range: "Feb 2022 — Jun 2023",
     summary:
-      "Part of a small dev team building a freehand web design tool used by around 1,000 active users.",
+      "Part of a small dev team building a web-based design tool with an active and growing user base. Worked across the full stack: shipping new features, fixing bugs, writing tests, and keeping the codebase healthy.",
     bullets: [
-      "Built object scaling and scroll-based animation features used across the editor.",
-      "Added YouTube and Vimeo embedding support as part of the core product functionality.",
-      "Wrote Jest tests for core behavior and reduced regressions during releases.",
+      "Built interactive UI features including object scaling and scroll-based animations.",
+      "Added media embedding support for third-party platforms like YouTube and Vimeo.",
+      "Wrote unit tests with Jest to catch regressions and maintain code quality.",
       "Updated multiple npm packages and resolved type and compatibility issues.",
-      "Collaborated with designers to match Figma mockups across screen sizes.",
+      "Collaborated closely with designers to ensure pixel-perfect implementation across devices.",
     ],
   },
   {
     id: "mom-design",
     company: "MOM Design",
+    url: "https://momdesign.nyc/",
     title: "Front End Developer",
-    range: "Jan 2023 — Apr 2023",
+    range: "Jan 2023 — Jun 2023",
     summary:
-      "Short-term role at a small design agency building responsive websites from Figma and Adobe XD mockups.",
+      "Worked at a design agency turning Figma and Adobe XD mockups into fully responsive websites. Communicated directly with clients and delivered under tight deadlines.",
     bullets: [
-      "Implemented pixel-accurate, responsive pages with React and Tailwind CSS.",
-      "Communicated directly with clients, gathered feedback, and shipped revisions on tight deadlines.",
-      "Kept code modular to simplify future updates and maintenance.",
+      "Built pixel-accurate, responsive pages using React and Tailwind CSS.",
+      "Gathered client feedback and shipped revisions quickly to meet project timelines.",
+      "Wrote clean, modular code to make future updates and maintenance straightforward.",
+      "Ensured consistent design implementation across desktop and mobile devices."
     ],
   },
 ];

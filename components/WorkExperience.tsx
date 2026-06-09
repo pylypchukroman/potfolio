@@ -12,7 +12,7 @@ function PanelBody({ job }: { job: Experience }) {
     <>
       <h3 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
         <span className="text-foreground">{job.title}</span>{" "}
-        <span className="text-accent">@ {job.company}</span>
+        <a href={job.url} target="_blank" rel="noopener noreferrer" className="text-accent">@ {job.company}</a>
       </h3>
       <p className="mt-2 font-mono text-sm text-muted">{job.range}</p>
       {job.summary ? (
