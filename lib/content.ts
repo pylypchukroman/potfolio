@@ -3,7 +3,7 @@
  * Photo: replace public/photo.jpg with your own image (same path, or update about.imageSrc).
  */
 
-export type SocialNetwork = "linkedin" | "facebook" | "leetcode" | "github";
+export type SocialNetwork = "linkedin" | "email" | "leetcode" | "github";
 
 export type SocialLink = {
   network: SocialNetwork;
@@ -213,22 +213,22 @@ export const socialLinks: SocialLink[] = [
   {
     network: "linkedin",
     label: "LinkedIn",
-    href: "https://www.linkedin.com",
+    href: "https://www.linkedin.com/in/roman-pylypchuk-dev/",
   },
   {
-    network: "facebook",
-    label: "Facebook",
-    href: "https://www.facebook.com/yourprofile",
+    network: "email",
+    label: "Email",
+    href: "mailto:romanpylypchuk@gmail.com",
   },
   {
     network: "leetcode",
     label: "LeetCode",
-    href: "https://leetcode.com/u/yourprofile",
+    href: "https://leetcode.com/u/inkbirds/",
   },
   {
     network: "github",
     label: "GitHub",
-    href: "https://github.com",
+    href: "https://github.com/pylypchukroman/",
   },
 ];
 

@@ -34,10 +34,11 @@ function Icon({
           <circle cx="4" cy="4" r="2" />
         </svg>
       );
-    case "facebook":
+    case "email":
       return (
         <svg viewBox="0 0 24 24" {...common}>
-          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+          <rect x="2" y="4" width="20" height="16" rx="2" />
+          <polyline points="2,4 12,13 22,4" />
         </svg>
       );
     case "leetcode":

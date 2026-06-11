@@ -48,8 +48,6 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
                   aria-controls={`${baseId}-panel-${p.id}`}
                   tabIndex={selected ? 0 : -1}
                   onClick={() => setActiveId(p.id)}
-                  onMouseEnter={() => setActiveId(p.id)}
-                  onFocus={() => setActiveId(p.id)}
                   className={
                     "group relative shrink-0 cursor-pointer whitespace-nowrap px-4 py-3 text-left font-mono text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:ring-offset-2 focus-visible:ring-offset-background " +
                     // mobile: underline indicator
