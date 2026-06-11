@@ -17,24 +17,17 @@ export type NavItem = {
   label: string;
 };
 
-/** String segment or inline link (renders accent-colored inside the project panel) */
-export type ProjectDescriptionPart =
-  | string
-  | { link: string; href: string };
-
 export type Project = {
   title: string;
   /** Screenshot under public/ */
   imageSrc: string;
   imageAlt: string;
-  /** Plain fallback if descriptionRich is omitted */
   description: string;
-  /** Optional mix of text and links for the overlapping panel */
-  descriptionRich?: ProjectDescriptionPart[];
   /** Small label above the title (e.g. Featured project) */
   eyebrow?: string;
   href?: string;
-  repo?: string;
+  /** One repo → plain icon. Two → first is FE, second is BE. */
+  repos?: string[];
   tech: string[];
   year?: string;
 };
@@ -126,7 +119,7 @@ export const about = {
   name: "Roman Pylypchuk",
   headline: "Full-Stack Developer",
   /** Path under public/ — swap the file to use your photo */
-  imageSrc: "/photo.jpg",
+  imageSrc: "/photo.webp",
   imageAlt: "Portrait of Roman Pylypchuk",
   bio: [
     "Hello! My name is Roman, and I enjoy building things that work on the internet. My interest in web development started in 2022 when I completed a bootcamp and learned that I really liked solving problems and shipping things that actually matter.",
@@ -242,41 +235,35 @@ export const projects: Project[] = [
   {
     eyebrow: "Featured project",
     title: "Session-Based Balance Tracker",
-    imageSrc: "/project-atlas.jpg",
+    imageSrc: "/balance_tracker.webp",
     imageAlt: "Session-Based Balance Tracker interface",
     description:
-      "Full-stack app for tracking cash and tournament session entries with balance calculations and secure authentication.",
-    descriptionRich: [
-      "Full-stack application with JWT auth using HttpOnly refresh tokens and secure token rotation. Includes Axios interceptors for automatic access token refresh and ",
-      { link: "React Query", href: "https://tanstack.com/query/latest" },
-      " for efficient server-state synchronization.",
-    ],
+      "A full-stack app for tracking financial sessions with real-time balance calculations. Built with secure JWT authentication and token rotation, plus React Query for smooth, synchronized server state.",
+    repos: ["https://github.com/pylypchukroman/poker_session_counter", "https://github.com/pylypchukroman/poker_session_counter_server"],
+    href: "https://poker-session-counter.onrender.com/",
     tech: ["React", "Node.js", "TypeScript", "MongoDB", "Tailwind CSS", "JWT"],
     year: "2025",
   },
   {
     eyebrow: "Featured project",
     title: "Polymarket Statistic Collector",
-    imageSrc: "/project-river.jpg",
+    imageSrc: "/project-river.webp",
     imageAlt: "Polymarket statistics collector backend",
     description:
-      "Node.js service that collects and stores prediction market data with live updates and event-based processing.",
-    descriptionRich: [
-      "Built for personal research with live data scripts, WebSocket event tracking, and a MongoDB schema designed for efficient retrieval and analysis.",
-    ],
-    tech: ["Node.js", "TypeScript", "WebSocket", "Axios", "MongoDB", "Slack API"],
+      "A Node.js service that collects and stores real-time prediction market data, using WebSocket connections for live updates and an event-driven architecture for efficient processing.",
+    repos: ["https://github.com/pylypchukroman/polymarket_stat_bot"],
+    tech: ["Node.js", "TypeScript", "WebSocket", "MongoDB", "Slack API"],
     year: "2025",
   },
   {
     eyebrow: "Featured project",
     title: "Smart Hashtag Generator",
-    imageSrc: "/project-compass.jpg",
+    imageSrc: "/generator.webp",
     imageAlt: "Smart Hashtag Generator web app",
     description:
-      "Responsive web app that generates social hashtags using OpenAI API and improves post workflow speed.",
-    descriptionRich: [
-      "Generates configurable hashtag sets from user prompts with one-click clipboard copy and fully responsive UI for desktop and mobile usage.",
-    ],
+      "A responsive web app that generates relevant social media hashtags using the OpenAI API. Features configurable hashtag counts and one-click copying to streamline content workflows.",
+    repos: ["https://github.com/pylypchukroman/smart_hashtag_generator"],
+    href: "https://smart-hashtag-generator.onrender.com/",
     tech: ["React", "SASS", "OpenAI API"],
     year: "2024",
   },

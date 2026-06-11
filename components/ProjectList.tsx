@@ -1,36 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { Fragment } from "react";
 import { Reveal } from "@/components/motion/Reveal";
 import { GitHubIcon, ExternalIcon } from "@/components/icons";
-import type { Project, ProjectDescriptionPart } from "@/lib/content";
-
-function renderDescription(parts: ProjectDescriptionPart[]) {
-  return parts.map((part, i) => {
-    if (typeof part === "string") {
-      return <Fragment key={i}>{part}</Fragment>;
-    }
-    return (
-      <a
-        key={i}
-        href={part.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="font-medium text-accent underline decoration-accent/35 underline-offset-2 transition-colors hover:text-accent-hover hover:decoration-accent-hover"
-      >
-        {part.link}
-      </a>
-    );
-  });
-}
-
-function descriptionFor(project: Project) {
-  if (project.descriptionRich?.length) {
-    return renderDescription(project.descriptionRich);
-  }
-  return project.description;
-}
+import type { Project } from "@/lib/content";
 
 type ProjectMetaColumnProps = {
   project: Project;
@@ -95,26 +68,34 @@ function ProjectMetaColumn({
           borderColor: "var(--project-panel-border)",
         }}
       >
-        <p>{descriptionFor(project)}</p>
+        <p>{project.description}</p>
       </div>
 
-      {project.repo || project.href ? (
+      {(project.repos?.length || project.href) ? (
         <div
           className={
             "mt-6 flex gap-6 " + (isLeft ? "justify-start" : "justify-end")
           }
         >
-          {project.repo ? (
-            <a
-              href={project.repo}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${project.title} on GitHub`}
-              className="text-muted transition-colors hover:text-accent focus-visible:text-accent"
-            >
-              <GitHubIcon className="h-6 w-6" strokeWidth={1.25} />
-            </a>
-          ) : null}
+          {(project.repos ?? []).map((url, i) => {
+            const multi = (project.repos?.length ?? 0) > 1;
+            const label = i === 0 ? "FE" : "BE";
+            return (
+              <a
+                key={url}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={multi ? `${project.title} ${label} on GitHub` : `${project.title} on GitHub`}
+                className="flex flex-col items-center gap-0.5 text-muted transition-colors hover:text-accent focus-visible:text-accent"
+              >
+                <GitHubIcon className="h-6 w-6" strokeWidth={1.25} />
+                {multi && (
+                  <span className="font-mono text-[0.6rem] uppercase tracking-widest">{label}</span>
+                )}
+              </a>
+            );
+          })}
           {project.href ? (
             <a
               href={project.href}
