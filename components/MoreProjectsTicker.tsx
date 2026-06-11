@@ -92,6 +92,11 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
                     <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
                       {active.description}
                     </p>
+                    {active.tech?.length ? (
+                      <p className="mt-4 font-mono text-sm text-muted">
+                        {active.tech.join(" · ")}
+                      </p>
+                    ) : null}
                   </div>
 
                   {(active.href || active.repo) && (
@@ -104,7 +109,6 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
                           className="inline-flex items-center gap-2 font-mono text-sm text-muted transition-colors hover:text-accent focus-visible:text-accent"
                         >
                           <ExternalIcon className="h-4 w-4" />
-                          Live
                         </a>
                       ) : null}
                       {active.repo ? (
@@ -115,7 +119,6 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
                           className="inline-flex items-center gap-2 font-mono text-sm text-muted transition-colors hover:text-accent focus-visible:text-accent"
                         >
                           <GitHubIcon className="h-4 w-4" />
-                          GitHub
                         </a>
                       ) : null}
                     </div>
