@@ -102,16 +102,17 @@ export function PortfolioPage() {
                 id="contact"
                 title={contactSection.title}
                 index={contactSection.number}
-                className="flex min-h-[min(70dvh,36rem)] w-full flex-1 flex-col"
-              >
-                <div className="space-y-10">
-                  <Contact
-                    intro={contact.intro}
-                    email={contact.email}
-                    emailCta={contact.emailCta}
-                  />
+                centerContent
+                className="flex min-h-[100dvh] w-full flex-col"
+                footer={
                   <p className="font-mono text-xs text-muted">{credit}</p>
-                </div>
+                }
+              >
+                <Contact
+                  intro={contact.intro}
+                  email={contact.email}
+                  emailCta={contact.emailCta}
+                />
               </Section>
               </div>
             </div>

@@ -54,6 +54,11 @@ type SectionProps = {
   animateContent?: boolean;
   children: React.ReactNode;
   className?: string;
+  contentClassName?: string;
+  /** Keep the heading with children in a vertically centered block (e.g. contact). */
+  centerContent?: boolean;
+  /** Pinned below centered content, at the bottom of the section. */
+  footer?: React.ReactNode;
 };
 
 export function Section({
@@ -63,8 +68,46 @@ export function Section({
   animateContent = true,
   children,
   className = "",
+  contentClassName = "",
+  centerContent = false,
+  footer,
 }: SectionProps) {
   const { container, item } = useSectionVariants();
+  const contentClass = ["min-w-0", contentClassName].filter(Boolean).join(" ");
+
+  const header =
+    index != null ? (
+      <motion.h2
+        id={`${id}-heading`}
+        variants={item}
+        className="mb-10 flex w-full min-w-0 flex-wrap items-center gap-x-3 gap-y-2 font-sans text-lg font-semibold tracking-tight text-foreground sm:gap-x-4"
+      >
+        <span className="shrink-0 font-mono text-base font-medium text-accent">
+          {index}.
+        </span>
+        <span className="min-w-0 shrink">{title}</span>
+        <span
+          className="hidden h-px min-h-px min-w-[2rem] flex-1 bg-border sm:block"
+          aria-hidden
+        />
+      </motion.h2>
+    ) : (
+      <motion.h2
+        id={`${id}-heading`}
+        variants={item}
+        className="mb-6 font-mono text-sm font-medium uppercase tracking-widest text-muted"
+      >
+        {title}
+      </motion.h2>
+    );
+
+  const body = animateContent ? (
+    <motion.div variants={item} className={contentClass}>
+      {children}
+    </motion.div>
+  ) : (
+    <div className={contentClass}>{children}</div>
+  );
 
   return (
     <motion.section
@@ -76,36 +119,19 @@ export function Section({
       viewport={sectionViewport}
       variants={container}
     >
-      {index != null ? (
-        <motion.h2
-          id={`${id}-heading`}
-          variants={item}
-          className="mb-10 flex w-full min-w-0 flex-wrap items-center gap-x-3 gap-y-2 font-sans text-lg font-semibold tracking-tight text-foreground sm:gap-x-4"
-        >
-          <span className="shrink-0 font-mono text-base font-medium text-accent">
-            {index}.
-          </span>
-          <span className="min-w-0 shrink">{title}</span>
-          <span
-            className="hidden h-px min-h-px min-w-[2rem] flex-1 bg-border sm:block"
-            aria-hidden
-          />
-        </motion.h2>
+      {centerContent ? (
+        <>
+          <div className="flex min-h-0 flex-1 flex-col justify-center">
+            {header}
+            {body}
+          </div>
+          {footer ? <div className="mt-auto shrink-0">{footer}</div> : null}
+        </>
       ) : (
-        <motion.h2
-          id={`${id}-heading`}
-          variants={item}
-          className="mb-6 font-mono text-sm font-medium uppercase tracking-widest text-muted"
-        >
-          {title}
-        </motion.h2>
-      )}
-      {animateContent ? (
-        <motion.div variants={item} className="min-w-0">
-          {children}
-        </motion.div>
-      ) : (
-        <div className="min-w-0">{children}</div>
+        <>
+          {header}
+          {body}
+        </>
       )}
     </motion.section>
   );
