@@ -153,7 +153,7 @@ type ProjectListProps = {
 
 export function ProjectList({ projects }: ProjectListProps) {
   return (
-    <ul className="flex flex-col gap-28 lg:gap-36">
+    <ul className="flex flex-col gap-16 lg:gap-20">
       {projects.map((project, index) => {
         /** Even: reference layout — copy left, screenshot right, panel overlaps image. Odd: mirrored. */
         const textLeftImageRight = index % 2 === 0;

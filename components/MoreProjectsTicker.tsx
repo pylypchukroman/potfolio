@@ -22,7 +22,7 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
   if (safeProjects.length === 0) return null;
 
   return (
-    <div className="mt-14">
+    <div className="mt-[106px]">
       <div className="mb-4 flex items-baseline justify-between gap-4">
         <p className="font-mono text-xs font-medium uppercase tracking-widest text-muted">
           More projects

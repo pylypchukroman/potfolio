@@ -55,15 +55,14 @@ export function PortfolioPage() {
             tabIndex={-1}
             className="min-w-0 scroll-mt-0 outline-none"
           >
-            <div className="flex flex-col gap-20 lg:gap-24">
-              <div className="flex min-h-[100dvh] w-full flex-col">
-                <Hero
-                  intro={hero.intro}
-                  resumeHref={hero.resumeHref}
-                  resumeLabel={hero.resumeLabel}
-                />
-              </div>
+            <div className="flex flex-col">
+              <Hero
+                intro={hero.intro}
+                resumeHref={hero.resumeHref}
+                resumeLabel={hero.resumeLabel}
+              />
 
+              <div className="mt-[148px] flex flex-col gap-20 lg:mt-[164px] lg:gap-24">
               <Section
                 id="about"
                 title="About"
@@ -83,7 +82,7 @@ export function PortfolioPage() {
                 id="experience"
                 title={experienceSection.title}
                 index={experienceSection.number}
-                className="flex min-h-[100dvh] w-full flex-1 flex-col"
+                className="mt-[120px] flex w-full flex-col"
               >
                 <WorkExperience experiences={experiences} />
               </Section>
@@ -92,6 +91,7 @@ export function PortfolioPage() {
                 id="projects"
                 title={projectsSection.title}
                 index={projectsSection.number}
+                className="mt-[calc(150px-5rem)] lg:mt-[calc(150px-6rem)]"
                 animateContent={false}
               >
                 <ProjectList projects={projects} />
@@ -113,6 +113,7 @@ export function PortfolioPage() {
                   <p className="font-mono text-xs text-muted">{credit}</p>
                 </div>
               </Section>
+              </div>
             </div>
           </main>
         </div>

@@ -75,15 +75,25 @@ export function WorkExperience({ experiences }: WorkExperienceProps) {
         })}
       </div>
 
-      <div className="pt-8">
-        <div
-          role="tabpanel"
-          id={`${baseId}-panel-${active.id}`}
-          aria-labelledby={`${baseId}-tab-${active.id}`}
-          className="w-full"
-        >
-          <PanelBody job={active} />
-        </div>
+      <div className="grid pt-8">
+        {experiences.map((job) => {
+          const selected = job.id === active.id;
+          return (
+            <div
+              key={job.id}
+              role="tabpanel"
+              id={`${baseId}-panel-${job.id}`}
+              aria-labelledby={`${baseId}-tab-${job.id}`}
+              aria-hidden={!selected}
+              className={
+                "col-start-1 row-start-1 w-full " +
+                (selected ? "" : "invisible")
+              }
+            >
+              <PanelBody job={job} />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
