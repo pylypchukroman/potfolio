@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { motionEase } from "@/components/motion/Reveal";
+import { sectionScrollClassName } from "@/lib/styles";
 
 /** Tall sections: ratio 0.2 can never be met on short viewports (visible slice < 20% of section height). */
 const sectionViewport = {
@@ -113,7 +114,7 @@ export function Section({
     <motion.section
       id={id}
       aria-labelledby={`${id}-heading`}
-      className={`scroll-mt-0 ${className}`}
+      className={`${sectionScrollClassName} ${className}`}
       initial="hidden"
       whileInView="visible"
       viewport={sectionViewport}

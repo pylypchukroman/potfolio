@@ -31,11 +31,11 @@ function ProjectMetaColumn({
           : " lg:items-end lg:self-start lg:text-right lg:pl-2")
       }
     >
-      <p className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-accent sm:text-sm">
+      <p className="font-mono text-xs font-medium uppercase tracking-widest text-accent sm:text-sm">
         {project.eyebrow ?? "Featured project"}
       </p>
 
-      <h3 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-[2.35rem] lg:leading-tight">
+      <h3 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
         {project.href ? (
           <a
             href={project.href}
@@ -61,13 +61,7 @@ function ProjectMetaColumn({
         </p>
       ) : null}
 
-      <div
-        className="mt-7 w-full rounded-md border p-6 text-left text-[0.9375rem] leading-relaxed text-foreground/95 shadow-[0_28px_60px_-20px_rgba(0,0,0,0.55)] sm:p-7 lg:shadow-[0_32px_70px_-24px_rgba(0,0,0,0.6)]"
-        style={{
-          backgroundColor: "var(--project-panel)",
-          borderColor: "var(--project-panel-border)",
-        }}
-      >
+      <div className="mt-7 w-full rounded-md border border-project-panel-border bg-project-panel p-6 text-left text-base leading-relaxed text-foreground shadow-[0_28px_60px_-20px_rgba(0,0,0,0.55)] sm:p-7 lg:shadow-[0_32px_70px_-24px_rgba(0,0,0,0.6)]">
         <p>{project.description}</p>
       </div>
 
@@ -159,8 +153,8 @@ export function ProjectList({ projects }: ProjectListProps) {
         const textLeftImageRight = index % 2 === 0;
         const metaAlign = textLeftImageRight ? ("left" as const) : ("right" as const);
         const metaOverlap = textLeftImageRight
-          ? "lg:-mr-12 xl:-mr-24 2xl:-mr-32"
-          : "lg:-ml-12 xl:-ml-24 2xl:-ml-32";
+          ? "lg:-mr-8 xl:-mr-16 2xl:-mr-24"
+          : "lg:-ml-8 xl:-ml-16 2xl:-ml-24";
 
         return (
           <li key={project.title}>

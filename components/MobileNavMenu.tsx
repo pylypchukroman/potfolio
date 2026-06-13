@@ -112,7 +112,7 @@ export function MobileNavMenu({
             <span className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 -rotate-45 rounded-full bg-current" />
           </span>
         </button>
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">{name}</h2>
+        <p className="text-2xl font-semibold tracking-tight text-foreground">{name}</p>
         <p className="mt-2 text-sm leading-relaxed text-muted">{headline}</p>
         <nav id="mobile-nav" aria-label="On this page" className="mt-4">
           <NavOnPageLinks

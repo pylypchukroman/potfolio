@@ -78,6 +78,8 @@ export const navigation: NavItem[] = [
 
 /** Hero — headline and general intro above the About section */
 export const hero = {
+  greeting: "Hi, my name is",
+  tagline: "I turn ideas into full-stack web products.",
   intro: [
     "I'm a full-stack developer based in Sydney who gets a kick out of building things that work. There's something satisfying about taking a rough idea, working through the hard parts, and ending up with a product that actually does what it's supposed to.",
     "I mostly work in the JavaScript ecosystem: React and Next.js on the front end, Node.js on the back end.",
@@ -128,7 +130,7 @@ export const about = {
     "My main focus these days is building full-stack web products with clean code and attention to detail. I'm particularly drawn to real-time systems and projects that involve integrating AI APIs. I work mostly with React, Next.js, Node.js, and MongoDB/PostgreSQL.",
   ],
   location: "Sydney, NSW",
-  /** Grouped skills — tabs on top, bullet list below (edit labels and items) */
+  /** Grouped skills — shown as labeled columns under Tech Stack */
   skillGroups: [
     {
       id: "languages",

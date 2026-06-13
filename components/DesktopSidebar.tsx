@@ -43,9 +43,9 @@ export function DesktopSidebar({
     >
       <StaggerContainer className="flex flex-col gap-4">
         <StaggerItem>
-          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+          <p className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
             {name}
-          </h1>
+          </p>
         </StaggerItem>
         <StaggerItem>
           <p className="max-w-xs text-base leading-relaxed text-muted">

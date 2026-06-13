@@ -12,7 +12,14 @@ function PanelBody({ job }: { job: Experience }) {
     <>
       <h3 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
         <span className="text-foreground">{job.title}</span>{" "}
-        <a href={job.url} target="_blank" rel="noopener noreferrer" className="text-accent">@ {job.company}</a>
+        <a
+          href={job.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-accent underline-offset-4 transition-colors hover:underline focus-visible:underline"
+        >
+          @ {job.company}
+        </a>
       </h3>
       <p className="mt-2 font-mono text-sm text-muted">{job.range}</p>
       {job.summary ? (
@@ -63,7 +70,7 @@ export function WorkExperience({ experiences }: WorkExperienceProps) {
               tabIndex={selected ? 0 : -1}
               onClick={() => setActiveId(job.id)}
               className={
-                "relative shrink-0 cursor-pointer whitespace-nowrap border-b-2 px-10 py-2.5 font-mono text-sm transition-colors max-sm:px-2 max-sm:text-xs " +
+                "relative shrink-0 cursor-pointer whitespace-nowrap border-b-2 px-4 py-2.5 font-mono text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:px-6 " +
                 (selected
                   ? "-mb-px border-accent font-medium text-accent"
                   : "border-transparent text-muted hover:text-foreground")

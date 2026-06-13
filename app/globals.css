@@ -8,10 +8,19 @@
   --accent-hover: #f0ff8a;
   --border: #1f454c;
   --card: #043338;
-  /* Overlapping project description panel — solid (opaque) so text stays readable over the image */
-  /* Overlapping project blurb — a step above page bg so it reads like the reference card */
   --project-panel: #0a4349;
   --project-panel-border: #2f5c63;
+
+  /* Vertical rhythm */
+  --space-hero-about: 9.25rem;
+  --space-hero-about-lg: 10.25rem;
+  --space-section: 5rem;
+  --space-section-lg: 6rem;
+  --space-about-experience: 7.5rem;
+  --space-experience-projects: 9.375rem;
+  --space-experience-projects-lg: 9.375rem;
+  --space-projects-more: 6.625rem;
+  --scroll-offset: 7rem;
 }
 
 @theme inline {
@@ -44,7 +53,41 @@ body {
   color: var(--foreground);
 }
 
-/* More projects: horizontal scroll list + detail card (MoreProjectsTicker) */
+.sections-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-section);
+  margin-top: var(--space-hero-about);
+}
+
+@media (min-width: 1024px) {
+  .sections-stack {
+    gap: var(--space-section-lg);
+    margin-top: var(--space-hero-about-lg);
+  }
+}
+
+#experience {
+  margin-top: var(--space-about-experience);
+}
+
+#projects {
+  margin-top: calc(
+    var(--space-experience-projects) - var(--space-section)
+  );
+}
+
+@media (min-width: 1024px) {
+  #projects {
+    margin-top: calc(
+      var(--space-experience-projects-lg) - var(--space-section-lg)
+    );
+  }
+}
+
+.more-projects-block {
+  margin-top: var(--space-projects-more);
+}
 
 /* Visible focus for keyboard users — do not remove */
 :focus-visible {

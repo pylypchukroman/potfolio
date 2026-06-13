@@ -40,7 +40,7 @@ export function PortfolioPage() {
 
   return (
     <div className="min-h-full">
-      <div className="mx-auto max-w-6xl py-16 pb-36 pl-4 pr-6 max-sm:pb-44 sm:pl-5 lg:py-24 lg:pb-24 lg:pl-8 lg:pr-12">
+      <div className="mx-auto max-w-6xl px-4 py-16 pb-24 sm:px-5 lg:px-8 lg:py-24">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)] lg:gap-24">
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <Sidebar
@@ -53,67 +53,63 @@ export function PortfolioPage() {
           <main
             id="content"
             tabIndex={-1}
-            className="min-w-0 scroll-mt-0 outline-none"
+            className="min-w-0 pt-14 outline-none lg:pt-0"
           >
             <div className="flex flex-col">
               <Hero
+                name={about.name}
+                greeting={hero.greeting}
+                tagline={hero.tagline}
                 intro={hero.intro}
                 resumeHref={hero.resumeHref}
                 resumeLabel={hero.resumeLabel}
               />
 
-              <div className="mt-[148px] flex flex-col gap-20 lg:mt-[164px] lg:gap-24">
-              <Section
-                id="about"
-                title="About"
-                index="01"
-                className="flex min-h-[100dvh] w-full flex-1 flex-col"
-              >
-                <About
-                  imageSrc={about.imageSrc}
-                  imageAlt={about.imageAlt}
-                  bio={about.bio}
-                  location={about.location}
-                  skillGroups={about.skillGroups}
-                />
-              </Section>
+              <div className="sections-stack">
+                <Section id="about" title="About" index="01">
+                  <About
+                    imageSrc={about.imageSrc}
+                    imageAlt={about.imageAlt}
+                    bio={about.bio}
+                    location={about.location}
+                    skillGroups={about.skillGroups}
+                  />
+                </Section>
 
-              <Section
-                id="experience"
-                title={experienceSection.title}
-                index={experienceSection.number}
-                className="mt-[120px] flex w-full flex-col"
-              >
-                <WorkExperience experiences={experiences} />
-              </Section>
+                <Section
+                  id="experience"
+                  title={experienceSection.title}
+                  index={experienceSection.number}
+                >
+                  <WorkExperience experiences={experiences} />
+                </Section>
 
-              <Section
-                id="projects"
-                title={projectsSection.title}
-                index={projectsSection.number}
-                className="mt-[calc(150px-5rem)] lg:mt-[calc(150px-6rem)]"
-                animateContent={false}
-              >
-                <ProjectList projects={projects} />
-                <MoreProjectsTicker projects={moreProjects} />
-              </Section>
+                <Section
+                  id="projects"
+                  title={projectsSection.title}
+                  index={projectsSection.number}
+                  animateContent={false}
+                >
+                  <ProjectList projects={projects} />
+                  <MoreProjectsTicker projects={moreProjects} />
+                </Section>
 
-              <Section
-                id="contact"
-                title={contactSection.title}
-                index={contactSection.number}
-                centerContent
-                className="flex min-h-[100dvh] w-full flex-col"
-                footer={
-                  <p className="font-mono text-xs text-muted">{credit}</p>
-                }
-              >
-                <Contact
-                  intro={contact.intro}
-                  email={contact.email}
-                  emailCta={contact.emailCta}
-                />
-              </Section>
+                <Section
+                  id="contact"
+                  title={contactSection.title}
+                  index={contactSection.number}
+                  centerContent
+                  className="flex min-h-[100dvh] w-full flex-col"
+                  footer={
+                    <p className="font-mono text-xs text-muted">{credit}</p>
+                  }
+                >
+                  <Contact
+                    intro={contact.intro}
+                    email={contact.email}
+                    emailCta={contact.emailCta}
+                  />
+                </Section>
               </div>
             </div>
           </main>

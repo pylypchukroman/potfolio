@@ -10,6 +10,32 @@ type AboutProps = {
   skillGroups: readonly SkillGroup[];
 };
 
+function SkillGroups({ groups }: { groups: readonly SkillGroup[] }) {
+  if (groups.length === 0) return null;
+
+  return (
+    <div>
+      <h3 className="font-mono text-xs font-medium uppercase tracking-widest text-muted">
+        Tech Stack
+      </h3>
+      <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-3">
+        {groups.map((group) => (
+          <div key={group.id}>
+            <p className="font-mono text-xs font-medium uppercase tracking-widest text-accent">
+              {group.label}
+            </p>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-muted">
+              {group.items.map((skill) => (
+                <li key={skill}>{skill}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function About({
   imageSrc,
   imageAlt,
@@ -17,13 +43,6 @@ export function About({
   location,
   skillGroups,
 }: AboutProps) {
-  const skills = skillGroups.flatMap((group) => group.items);
-  const skillColumns = [[], [], []] as string[][];
-
-  skills.forEach((skill, index) => {
-    skillColumns[index % 3].push(skill);
-  });
-
   return (
     <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-10">
       <PhotoReveal className="shrink-0">
@@ -33,7 +52,7 @@ export function About({
             alt={imageAlt}
             fill
             sizes="224px"
-            className="object-cover transition-[filter] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] lg:grayscale lg:group-hover:grayscale-0 lg:group-focus-within:grayscale-0 motion-reduce:transition-none"
+            className="object-cover grayscale transition-[filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grayscale-0 group-focus-within:grayscale-0 motion-reduce:grayscale-0 motion-reduce:transition-none"
             priority
           />
         </div>
@@ -46,30 +65,12 @@ export function About({
             </Reveal>
           ))}
           <Reveal delay={bio.length * 0.05}>
-            <p className="font-mono text-sm text-foreground/80">{location}</p>
+            <p className="font-mono text-sm text-muted">{location}</p>
           </Reveal>
         </div>
         {skillGroups.length > 0 ? (
           <Reveal delay={(bio.length + 1) * 0.05}>
-            <div>
-              <h3 className="font-mono text-sm font-medium uppercase tracking-widest text-muted">
-                Tech Stack
-              </h3>
-              <div className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3">
-                {skillColumns.map((column, columnIndex) => (
-                  <ul
-                    key={columnIndex}
-                    className="list-disc space-y-2 pl-5 text-sm text-muted"
-                  >
-                    {column.map((skill) => (
-                      <li key={`${columnIndex}-${skill}`} className="break-words">
-                        {skill}
-                      </li>
-                    ))}
-                  </ul>
-                ))}
-              </div>
-            </div>
+            <SkillGroups groups={skillGroups} />
           </Reveal>
         ) : null}
       </div>

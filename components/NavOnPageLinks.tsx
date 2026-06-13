@@ -1,7 +1,7 @@
 import type { NavItem } from "@/lib/content";
 
 const linkClass =
-  "relative inline-block cursor-pointer py-1 pl-3 text-left transition-colors duration-200 before:absolute before:left-0 before:top-1 before:bottom-1 before:w-0.5 before:rounded-full before:transition-colors ";
+  "relative inline-block cursor-pointer py-1 pl-3 text-left transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background before:absolute before:left-0 before:top-1 before:bottom-1 before:w-0.5 before:rounded-full before:transition-colors ";
 
 type NavOnPageLinksProps = {
   navigation: NavItem[];

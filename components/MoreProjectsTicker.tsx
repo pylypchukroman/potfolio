@@ -2,14 +2,13 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useId, useState } from "react";
+import { motionEase } from "@/components/motion/Reveal";
 import { ExternalIcon, GitHubIcon } from "@/components/icons";
 import type { MiniProject } from "@/lib/content";
 
 type MoreProjectsTickerProps = {
   projects: readonly MiniProject[];
 };
-
-const ease = [0.22, 1, 0.36, 1] as const;
 
 export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
   const reduce = useReducedMotion();
@@ -22,7 +21,7 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
   if (safeProjects.length === 0) return null;
 
   return (
-    <div className="mt-[106px]">
+    <div className="more-projects-block">
       <div className="mb-4 flex items-baseline justify-between gap-4">
         <p className="font-mono text-xs font-medium uppercase tracking-widest text-muted">
           More projects
@@ -30,11 +29,11 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
       </div>
 
       <div className="rounded-xl bg-card/60 p-4 sm:p-5 md:p-7">
-        <div className="flex flex-col gap-8 md:flex-row md:gap-16">
+        <div className="flex flex-col gap-8 lg:flex-row lg:gap-16">
           <div
             role="tablist"
             aria-label="More projects"
-            className="flex overflow-x-auto border-b border-border md:w-64 md:flex-col md:overflow-visible md:border-b-0 md:border-l md:border-border"
+            className="flex overflow-x-auto border-b border-border lg:w-64 lg:flex-col lg:overflow-visible lg:border-b-0 lg:border-l lg:border-border"
           >
             {safeProjects.map((p) => {
               const selected = active?.id === p.id;
@@ -49,14 +48,12 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
                   tabIndex={selected ? 0 : -1}
                   onClick={() => setActiveId(p.id)}
                   className={
-                    "group relative shrink-0 cursor-pointer whitespace-nowrap px-4 py-3 text-left font-mono text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:ring-offset-2 focus-visible:ring-offset-background " +
-                    // mobile: underline indicator
-                    "border-b-2 md:border-b-0 md:pl-6 md:pr-4 " +
-                    // desktop: left indicator
-                    "md:before:absolute md:before:left-0 md:before:top-0 md:before:h-full md:before:w-0.5 md:before:rounded-full " +
+                    "group relative shrink-0 cursor-pointer whitespace-nowrap px-4 py-3 text-left font-mono text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background " +
+                    "border-b-2 lg:border-b-0 lg:pl-6 lg:pr-4 " +
+                    "lg:before:absolute lg:before:left-0 lg:before:top-0 lg:before:h-full lg:before:w-0.5 lg:before:rounded-full " +
                     (selected
-                      ? "border-accent text-accent md:before:bg-accent"
-                      : "border-transparent text-muted hover:text-foreground md:before:bg-transparent")
+                      ? "border-accent text-accent lg:before:bg-accent"
+                      : "border-transparent text-muted hover:text-foreground lg:before:bg-transparent")
                   }
                 >
                   <span className="flex items-center justify-between gap-3">
@@ -67,7 +64,7 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
             })}
           </div>
 
-          <div className="min-w-0 flex-1 md:pl-6">
+          <div className="min-w-0 flex-1 lg:pl-6">
             <AnimatePresence mode="wait" initial={false}>
               {active ? (
                 <motion.div
@@ -78,7 +75,7 @@ export function MoreProjectsTicker({ projects }: MoreProjectsTickerProps) {
                   initial={reduce ? false : { opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={reduce ? undefined : { opacity: 0, y: 6 }}
-                  transition={reduce ? { duration: 0 } : { duration: 0.35, ease }}
+                  transition={reduce ? { duration: 0 } : { duration: 0.35, ease: motionEase }}
                   className="min-h-56 sm:min-h-72"
                 >
                   <div className="min-w-0">
