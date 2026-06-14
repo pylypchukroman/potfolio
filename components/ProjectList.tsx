@@ -24,7 +24,15 @@ const PANEL_OVERLAP: Record<Side, string> = {
   right: "lg:-mr-8 xl:-mr-10 2xl:-mr-20",
 };
 
-function ProjectLinks({ project, align }: { project: Project; align: Side }) {
+function ProjectLinks({
+  project,
+  align,
+  className = "",
+}: {
+  project: Project;
+  align: Side;
+  className?: string;
+}) {
   const repos = project.repos ?? [];
   if (repos.length === 0 && !project.href) return null;
 
@@ -32,7 +40,7 @@ function ProjectLinks({ project, align }: { project: Project; align: Side }) {
 
   return (
     <div
-      className={`mt-4 flex gap-6 lg:mt-5 ${align === "right" ? "justify-end" : "justify-start"}`}
+      className={`mt-3 flex gap-6 lg:mt-5 ${align === "right" ? "justify-end" : "justify-start"} ${className}`}
     >
       {repos.map((url, i) => {
         const label = i === 0 ? "FE" : "BE";
@@ -99,6 +107,8 @@ function ProjectMetaColumn({
         {project.title}
       </h3>
 
+      <ProjectLinks project={project} align="left" className="lg:hidden" />
+
       <p
         className={`mt-2 w-full font-mono text-sm leading-relaxed text-muted ${
           textSide === "left" ? "text-left lg:self-start" : "text-right lg:self-end"
@@ -141,7 +151,11 @@ function ProjectImageColumn({
           sizes="(max-width: 1024px) 100vw, 422px"
         />
       </div>
-      <ProjectLinks project={project} align={linkAlign} />
+      <ProjectLinks
+        project={project}
+        align={linkAlign}
+        className="hidden lg:flex"
+      />
     </div>
   );
 }

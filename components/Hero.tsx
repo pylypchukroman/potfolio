@@ -43,7 +43,7 @@ export function Hero({
           transition={reduceMotion ? { duration: 0 } : { duration: 1.1, delay: 0.16, ease }}
         >
           <motion.span
-            className="block font-mono text-sm font-medium tracking-wide text-accent sm:text-base"
+            className="block font-mono text-sm font-medium tracking-wide text-muted sm:text-base"
             initial={reduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={reduceMotion ? { duration: 0 } : { duration: 0.7, delay: 0.28 }}

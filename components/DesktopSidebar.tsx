@@ -18,6 +18,8 @@ export type DesktopSidebarProps = {
   onNavLinkClick: (id: string) => void;
   /** Fades the sidebar in after the user reaches the configured anchor section. */
   revealed: boolean;
+  resumeHref?: string;
+  resumeLabel?: string;
 };
 
 export function DesktopSidebar({
@@ -28,6 +30,8 @@ export function DesktopSidebar({
   activeId,
   onNavLinkClick,
   revealed,
+  resumeHref,
+  resumeLabel = "Résumé",
 }: DesktopSidebarProps) {
   function goToSection(id: string) {
     onNavLinkClick(id);
@@ -48,9 +52,27 @@ export function DesktopSidebar({
           </p>
         </StaggerItem>
         <StaggerItem>
-          <p className="max-w-xs text-base leading-relaxed text-muted">
-            {headline}
-          </p>
+          <div className="flex flex-col gap-3">
+            <p className="max-w-xs text-base leading-relaxed text-muted">
+              {headline}
+            </p>
+            {resumeHref ? (
+              <span className="group/resume relative w-fit">
+                <span
+                  className="pointer-events-none absolute -inset-x-5 -inset-y-2 rounded-lg bg-accent/[30.25%] opacity-[0.85] blur-xl transition-opacity duration-300 group-hover/resume:opacity-100 group-focus-within/resume:opacity-100 motion-reduce:transition-none"
+                  aria-hidden
+                />
+                <a
+                  href={resumeHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative text-base leading-relaxed text-accent transition-colors hover:text-accent-hover focus-visible:text-accent-hover"
+                >
+                  {resumeLabel}
+                </a>
+              </span>
+            ) : null}
+          </div>
         </StaggerItem>
         <StaggerItem>
           <nav aria-label="On this page">

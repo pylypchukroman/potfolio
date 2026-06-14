@@ -10,6 +10,8 @@ type SidebarProps = {
   headline: string;
   navigation: NavItem[];
   socialLinks: SocialLink[];
+  resumeHref?: string;
+  resumeLabel?: string;
 };
 
 export function Sidebar({
@@ -17,6 +19,8 @@ export function Sidebar({
   headline,
   navigation,
   socialLinks,
+  resumeHref,
+  resumeLabel,
 }: SidebarProps) {
   const { activeId, onNavLinkClick, desktopSidebarRevealed } =
     useActiveNavSection(navigation, "about");
@@ -39,6 +43,8 @@ export function Sidebar({
         activeId={activeId}
         onNavLinkClick={onNavLinkClick}
         revealed={desktopSidebarRevealed}
+        resumeHref={resumeHref}
+        resumeLabel={resumeLabel}
       />
     </>
   );

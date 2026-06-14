@@ -48,6 +48,8 @@ export function PortfolioPage() {
               headline={about.headline}
               navigation={navigation}
               socialLinks={socialLinks}
+              resumeHref={hero.resumeHref}
+              resumeLabel={hero.resumeLabel}
             />
           </aside>
           <main

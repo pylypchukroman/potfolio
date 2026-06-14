@@ -120,7 +120,7 @@ export const contact = {
 
 export const about = {
   name: "Roman Pylypchuk",
-  headline: "Full-Stack Developer",
+  headline: "Full Stack Web Developer",
   /** Path under public/ — swap the file to use your photo */
   imageSrc: "/photo.webp",
   imageAlt: "Portrait of Roman Pylypchuk",
