@@ -40,7 +40,7 @@ export function PortfolioPage() {
 
   return (
     <div className="min-h-full">
-      <div className="mx-auto max-w-6xl px-4 py-16 pb-24 sm:px-5 lg:px-8 lg:py-24">
+      <div className="mx-auto max-w-6xl px-4 pt-16 pb-12 sm:px-5 lg:px-8 lg:pt-24 lg:pb-12">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)] lg:gap-24">
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <Sidebar

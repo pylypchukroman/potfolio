@@ -129,7 +129,7 @@ export const about = {
     "Fast-forward to today, and I've had the privilege of working at a product company, a design studio, and launching solo freelance projects. I've built features for products with real users, worked in small teams on complex problems, and learned what it takes to ship something people care about. Right now I'm studying at TAFE NSW while taking on freelance work.",
     "My main focus these days is building full-stack web products with clean code and attention to detail. I'm particularly drawn to real-time systems and projects that involve integrating AI APIs. I work mostly with React, Next.js, Node.js, and MongoDB/PostgreSQL.",
   ],
-  location: "Sydney, NSW",
+  location: "Sydney, Australia",
   /** Grouped skills — shown as labeled columns under Tech Stack */
   skillGroups: [
     {

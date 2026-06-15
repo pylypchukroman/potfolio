@@ -14,7 +14,7 @@ const IMAGE_FRAME =
   "relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-border/50 bg-muted/10 shadow-[0_24px_50px_-28px_rgba(0,0,0,0.45)] sm:aspect-[16/11] lg:aspect-[16/10] xl:aspect-auto xl:h-[264px] xl:w-[422px]";
 
 const IMAGE_GRAYSCALE =
-  "object-cover object-top grayscale transition-[filter] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grayscale-0 group-focus-within:grayscale-0 motion-reduce:grayscale-0 motion-reduce:transition-none";
+  "object-cover object-top grayscale-0 transition-[filter] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] lg:grayscale lg:group-hover:grayscale-0 lg:group-focus-within:grayscale-0 motion-reduce:grayscale-0 motion-reduce:transition-none";
 
 const DESCRIPTION_PANEL =
   "relative z-10 mt-7 w-full rounded-md border border-project-panel-border bg-project-panel p-6 text-left text-base leading-relaxed text-foreground shadow-[0_28px_60px_-20px_rgba(0,0,0,0.55)] sm:p-7 lg:w-[158.4%] lg:max-w-[810px] lg:shadow-[0_32px_70px_-24px_rgba(0,0,0,0.6)]";
