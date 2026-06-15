@@ -12,14 +12,14 @@
   --project-panel-border: #2f5c63;
 
   /* Vertical rhythm */
-  --space-hero-about: 9.25rem;
-  --space-hero-about-lg: 10.25rem;
+  --space-hero-about: 200px;
   --space-section: 5rem;
   --space-section-lg: 6rem;
   --space-about-experience: 7.5rem;
   --space-experience-projects: 9.375rem;
   --space-experience-projects-lg: 9.375rem;
   --space-projects-more: 6.625rem;
+  --space-projects-contact: 200px;
   --scroll-offset: 7rem;
 }
 
@@ -63,7 +63,6 @@ body {
 @media (min-width: 1024px) {
   .sections-stack {
     gap: var(--space-section-lg);
-    margin-top: var(--space-hero-about-lg);
   }
 }
 
@@ -87,6 +86,10 @@ body {
 
 .more-projects-block {
   margin-top: var(--space-projects-more);
+}
+
+#contact {
+  margin-top: var(--space-projects-contact);
 }
 
 /* Visible focus for keyboard users — do not remove */

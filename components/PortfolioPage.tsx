@@ -101,7 +101,7 @@ export function PortfolioPage() {
                   title={contactSection.title}
                   index={contactSection.number}
                   centerContent
-                  className="flex min-h-[100dvh] w-full flex-col"
+                  className="flex w-full flex-col"
                   footer={
                     <p className="font-mono text-xs text-muted">{credit}</p>
                   }

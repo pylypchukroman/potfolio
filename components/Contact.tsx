@@ -17,7 +17,7 @@ function mailtoHref(address: string) {
 
 export function Contact({ intro, email, emailCta }: ContactProps) {
   return (
-    <div className="max-w-xl space-y-10">
+    <div className="mb-[300px] max-w-xl space-y-10">
       <div className="space-y-4">
         {intro.map((paragraph, i) => (
           <Reveal key={i} delay={i * 0.05}>

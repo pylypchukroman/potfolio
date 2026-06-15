@@ -30,12 +30,12 @@ export function Hero({
     <motion.section
       id="hero"
       aria-label="Introduction"
-      className={`flex w-full flex-1 flex-col pb-4 sm:pb-8 ${sectionScrollClassName}`}
+      className={`flex min-h-[100dvh] w-full flex-col justify-center -mt-[calc(3.5rem+4rem)] pt-[calc(3.5rem+4rem)] lg:-mt-24 lg:pt-24 ${sectionScrollClassName}`}
       initial={reduceMotion ? false : { opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={reduceMotion ? { duration: 0 } : { duration: 1.4, ease }}
     >
-      <div className="flex max-w-2xl flex-1 flex-col gap-8">
+      <div className="flex max-w-2xl flex-col gap-8">
         <motion.h1
           className="text-balance"
           initial={reduceMotion ? false : { opacity: 0, y: 14 }}
