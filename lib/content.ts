@@ -66,7 +66,14 @@ export const site = {
   title: "Roman Pylypchuk — Portfolio",
   description:
     "Full-stack developer portfolio: projects, experience, and technical background.",
-  url: "https://example.com",
+  url: "https://romanpylypchuk.dev",
+  /** Social preview image under public/ */
+  ogImage: {
+    src: "/og-image.png",
+    alt: "Roman Pylypchuk — Full Stack Web Developer",
+    width: 1024,
+    height: 537,
+  },
 } as const;
 
 export const navigation: NavItem[] = [

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { site } from "@/lib/content";
+import { about, site } from "@/lib/content";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -22,11 +22,21 @@ export const metadata: Metadata = {
     description: site.description,
     type: "website",
     url: site.url,
+    siteName: about.name,
+    images: [
+      {
+        url: site.ogImage.src,
+        width: site.ogImage.width,
+        height: site.ogImage.height,
+        alt: site.ogImage.alt,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: site.title,
     description: site.description,
+    images: [site.ogImage.src],
   },
 };
 
