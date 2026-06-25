@@ -8,6 +8,7 @@ import { ProjectList } from "@/components/ProjectList";
 import { Section } from "@/components/Section";
 import { Sidebar } from "@/components/Sidebar";
 import { WorkExperience } from "@/components/WorkExperience";
+import { GitHubIcon } from "@/components/icons";
 import {
   about,
   contact,
@@ -34,7 +35,16 @@ export function PortfolioPage() {
       >
         Brittany Chiang
       </a>
-      . Built with Next.js.
+      . Built with Next.js.{" "}
+      <a
+        href="https://github.com/pylypchukroman/potfolio"
+        aria-label="View project source on GitHub"
+        className="inline-flex align-middle text-muted transition-colors hover:text-accent focus-visible:text-accent"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <GitHubIcon className="h-3.5 w-3.5" strokeWidth={1.25} />
+      </a>
     </>
   );
 
@@ -103,7 +113,9 @@ export function PortfolioPage() {
                   centerContent
                   className="flex w-full flex-col"
                   footer={
-                    <p className="font-mono text-xs text-muted">{credit}</p>
+                    <p className="w-full text-left font-mono text-xs text-muted">
+                      {credit}
+                    </p>
                   }
                 >
                   <Contact
