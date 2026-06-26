@@ -19,7 +19,10 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
         <div
           className="loading-fly-square loading-fly-square--lead bg-accent"
           onAnimationEnd={(event) => {
-            if (event.animationName === "loading-fly") {
+            if (
+              event.animationName === "loading-fly" ||
+              event.animationName === "loading-fly-compact"
+            ) {
               onComplete();
             }
           }}

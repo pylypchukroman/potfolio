@@ -173,6 +173,51 @@ body {
   }
 }
 
+@media (max-width: 1023px) {
+  .loading-fly-track {
+    width: 12px;
+    height: 12px;
+  }
+
+  .loading-fly-square--lead {
+    width: 12px;
+    height: 12px;
+  }
+
+  .loading-fly-square--trail-1 {
+    width: 10px;
+    height: 10px;
+  }
+
+  .loading-fly-square--trail-2 {
+    width: 8px;
+    height: 8px;
+  }
+
+  .loading-fly-square--trail-3 {
+    width: 6px;
+    height: 6px;
+  }
+
+  .loading-fly-square--trail-4 {
+    width: 5px;
+    height: 5px;
+  }
+
+  .loading-fly-square {
+    animation-name: loading-fly-compact;
+  }
+}
+
+@keyframes loading-fly-compact {
+  from {
+    transform: translateX(calc(-50vw - 12px));
+  }
+  to {
+    transform: translateX(calc(50vw + 12px));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .loading-fly-square {
     animation: none;
