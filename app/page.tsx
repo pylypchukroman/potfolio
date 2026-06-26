@@ -1,5 +1,10 @@
+import { InitialLoadGate } from "@/components/InitialLoadGate";
 import { PortfolioPage } from "@/components/PortfolioPage";
 
 export default function Home() {
-  return <PortfolioPage />;
+  return (
+    <InitialLoadGate>
+      <PortfolioPage />
+    </InitialLoadGate>
+  );
 }

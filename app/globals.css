@@ -101,3 +101,81 @@ body {
 :focus:not(:focus-visible) {
   outline: none;
 }
+
+.loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.loading-fly-track {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.loading-fly-square {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  animation: loading-fly 1.25s ease-in-out both;
+}
+
+.loading-fly-square--lead {
+  width: 20px;
+  height: 20px;
+}
+
+.loading-fly-square--trail-1 {
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  filter: brightness(0.78);
+  opacity: 0.88;
+  animation-delay: 0.035s;
+}
+
+.loading-fly-square--trail-2 {
+  width: 13px;
+  height: 13px;
+  background: var(--accent);
+  filter: brightness(0.62);
+  opacity: 0.68;
+  animation-delay: 0.07s;
+}
+
+.loading-fly-square--trail-3 {
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  filter: brightness(0.48);
+  opacity: 0.48;
+  animation-delay: 0.105s;
+}
+
+.loading-fly-square--trail-4 {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  filter: brightness(0.36);
+  opacity: 0.32;
+  animation-delay: 0.14s;
+}
+
+@keyframes loading-fly {
+  from {
+    transform: translateX(calc(-50vw - 20px));
+  }
+  to {
+    transform: translateX(calc(50vw + 20px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-fly-square {
+    animation: none;
+    transform: none;
+  }
+}
