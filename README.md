@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# potfolio
 
-## Getting Started
+Personal portfolio site for [Roman Pylypchuk](https://romanpylypchuk.dev). Single-page layout inspired by [Brittany Chiang's v4 portfolio](https://v4.brittanychiang.com/), built with Next.js App Router.
 
-First, run the development server:
+## Features
+
+- **Hero, About, Experience, Projects, Contact** — sticky sidebar navigation on desktop, mobile menu on smaller screens
+- **Scroll-driven motion** — section reveals and hero entrance via Framer Motion
+- **Loading screen** — CSS comet animation on every page load (desktop: 20×20px lead square; mobile/tablet: 12×12px). Skipped when `prefers-reduced-motion` is enabled
+- **Content-driven** — copy, projects, experience, and links live in one file for easy edits
+- **Vercel Analytics** — optional page analytics in production
+
+## Tech stack
+
+- [Next.js 16](https://nextjs.org) (App Router, Turbopack in dev)
+- [React 19](https://react.dev)
+- [TypeScript](https://www.typescriptlang.org)
+- [Tailwind CSS 4](https://tailwindcss.com)
+- [Framer Motion](https://www.framer.com/motion/)
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command        | Description              |
+| -------------- | ------------------------ |
+| `npm run dev`  | Start dev server         |
+| `npm run build`| Production build         |
+| `npm run start`| Serve production build   |
+| `npm run lint` | Run ESLint               |
 
-## Learn More
+## Customize the site
 
-To learn more about Next.js, take a look at the following resources:
+Most site content is in [`lib/content.ts`](lib/content.ts):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `site` — title, description, URL, Open Graph image
+- `about` — name, bio, photo, skills
+- `hero`, `contact`, `socialLinks`
+- `experiences`, `projects`, `moreProjects`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Replace assets under `public/` (e.g. `photo.webp`, `resume.pdf`, project screenshots).
 
-## Deploy on Vercel
+Loading animation styles: [`app/globals.css`](app/globals.css) (`.loading-screen`, `.loading-fly-square`). Logic: [`components/InitialLoadGate.tsx`](components/InitialLoadGate.tsx), [`components/LoadingScreen.tsx`](components/LoadingScreen.tsx).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+app/              App Router layout, global styles, home page
+components/       UI sections and loading screen
+lib/content.ts    Portfolio copy and data
+public/           Static assets (images, resume, OG image)
+```
+
+## Deploy
+
+Deploy on [Vercel](https://vercel.com) or any platform that supports Next.js. Set `site.url` in `lib/content.ts` to your production domain for correct metadata.
